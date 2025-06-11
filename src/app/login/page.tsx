@@ -1,37 +1,63 @@
 'use client'
 
-import styles from './login-page.module.css'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 export default function LoginPage() {
-  const router = useRouter()
-  const supabase = createClient()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const handleGoogleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    })
-    if (!error) {
-      // The redirect will happen automatically
-    } else {
-      alert('Google sign in failed!')
-    }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    // Add your login logic here
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-transparent">
-      {/* Centered login card */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className={`${styles.loginCard} w-full max-w-md mx-auto flex flex-col items-center p-8 md:p-10`}>
-          <div className={`${styles.loginTitle} mb-4`}>Sign In</div>
-          <div className={`${styles.loginDesc} mb-8`}>Sign in to access your dashboard and manage your AI prompts securely.</div>
-          <button className={`${styles.neonButton} w-full`} onClick={handleGoogleLogin}>
-            Sign in with Google
-          </button>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+      <div className="w-full max-w-md p-8 space-y-8 bg-gray-800 rounded-lg shadow-lg">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
+          <p className="mt-2 text-gray-400">Please sign in to your account</p>
+        </div>
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="mt-1"
+              />
+            </div>
+          </div>
+          <Button type="submit" className="w-full">
+            Sign In
+          </Button>
+        </form>
+        <div className="text-center mt-4">
+          <p className="text-gray-400">
+            Don&apos;t have an account?{' '}
+            <Link href="/signup" className="text-blue-500 hover:text-blue-400">
+              Sign up
+            </Link>
+          </p>
         </div>
       </div>
     </div>
