@@ -1,0 +1,86 @@
+.navbar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 0;
+  background: linear-gradient(90deg, rgba(24,28,34,0.92) 60%, rgba(6, 182, 212, 0.04) 100%);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(16px);
+  border-radius: 0 0 1.2rem 1.2rem;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.navbarInner {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.navbarBrand {
+  font-family: var(--font-digital);
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  letter-spacing: 0.18em;
+  font-weight: bold;
+  user-select: none;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbarMenu {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+.navbarLink {
+  color: var(--text-primary);
+  font-family: var(--font-digital);
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-bottom 0.2s;
+  text-decoration: none;
+  position: relative;
+  background: none;
+  outline: none;
+  border-radius: 0.5rem;
+}
+
+.navbarLink:hover, .navbarLink.active {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.navbarDivider {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--primary-color);
+  opacity: 0.5;
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+@media (max-width: 700px) {
+  .navbarInner {
+    padding: 0 1rem;
+  }
+  .navbarMenu {
+    gap: 1.2rem;
+  }
+  .navbarBrand {
+    font-size: 1.1rem;
+  }
+} 
