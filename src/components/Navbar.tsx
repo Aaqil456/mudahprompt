@@ -3,13 +3,26 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import styles from "../styles/Navbar.module.css"
+
+interface NavItem {
+  href: string
+  label: string
+}
+
+const navItems: NavItem[] = [
+  { href: '/', label: 'Home' },
+  { href: '/prompt-assistant', label: 'Prompt Assistant' },
+  { href: '/privacy-policy', label: 'Privacy' },
+  { href: '/terms', label: 'Terms' }
+]
 
 export default function Navbar() {
   const [user, setUser] = useState<any>(null)
   const supabase = createClient()
   const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -29,12 +42,31 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.navbarInner}>
-        <Link href="/" className={styles.navbarBrand}>MudahPrompt</Link>
-        <div className={styles.navbarMenu}>
-          <Link href="/" className={styles.navbarLink}>Home</Link>
-          <span className={styles.navbarDivider}></span>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <Link href="/" className="text-xl font-bold text-white">
+              MudahPrompt
+            </Link>
+          </div>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${
+                    pathname === item.href
+                      ? 'text-blue-500'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
           {!user && (
             <Link href="/login" className={styles.navbarLink}>Sign In</Link>
           )}

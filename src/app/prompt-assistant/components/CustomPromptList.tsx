@@ -1,136 +1,78 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
-import styles from "./CustomPromptList.module.css";
+import { useState } from 'react'
 
-interface CustomPrompt {
-  id: string;
-  title: string;
-  fields: string[];
-  template: string;
-  created_at: string;
+interface PromptTemplate {
+  title: string
+  description: string
+  template: string
+  category: string
 }
 
 interface CustomPromptListProps {
-  onSelect: (assistant: any) => void;
-  selectedAssistant: any;
+  templates: PromptTemplate[]
+  onSelect: (template: PromptTemplate) => void
 }
 
-export default function CustomPromptList({ onSelect, selectedAssistant }: CustomPromptListProps) {
-  const [prompts, setPrompts] = useState<CustomPrompt[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default function CustomPromptList({ templates, onSelect }: CustomPromptListProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [searchQuery, setSearchQuery] = useState<string>('')
 
-  const supabase = createClient();
-  const router = useRouter();
+  const categories = ['all', ...new Set(templates.map(t => t.category))]
 
-  useEffect(() => {
-    const fetchPrompts = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session) {
-          router.replace('/login');
-          return;
-        }
-
-        const { data, error } = await supabase
-          .from('custom_prompt_builders')
-          .select('*')
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        setPrompts(data || []);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPrompts();
-  }, [router, supabase]);
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this prompt assistant?')) return;
-
-    try {
-      const { error } = await supabase
-        .from('custom_prompt_builders')
-        .delete()
-        .eq('id', id);
-
-      if (error) throw error;
-      setPrompts(prompts.filter(prompt => prompt.id !== id));
-    } catch (err: any) {
-      setError(err.message);
-    }
-  };
-
-  if (loading) {
-    return <div className={styles.loading}>Loading your prompt assistants...</div>;
-  }
-
-  if (error) {
-    return <div className={styles.error}>Error: {error}</div>;
-  }
-
-  if (prompts.length === 0) {
-    return (
-      <div className={styles.empty}>
-        <p>You haven't created any prompt assistants yet.</p>
-        <button 
-          className={styles.createButton}
-          onClick={() => router.push('/prompt-assistant-builder')}
-        >
-          Create Your First Assistant
-        </button>
-      </div>
-    );
-  }
+  const filteredTemplates = templates.filter(template => {
+    const matchesCategory = selectedCategory === 'all' || template.category === selectedCategory
+    const matchesSearch = template.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         template.description.toLowerCase().includes(searchQuery.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>Your Custom Assistants</h2>
-        <button 
-          className={styles.createButton}
-          onClick={() => router.push('/prompt-assistant-builder')}
+    <div className="space-y-4">
+      <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white"
         >
-          Create New
-        </button>
+          {categories.map(category => (
+            <option key={category} value={category}>
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          placeholder="Search templates..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white"
+        />
       </div>
-      <div className={styles.list}>
-        {prompts.map((prompt) => (
-          <div 
-            key={prompt.id} 
-            className={`${styles.card} ${selectedAssistant?.id === prompt.id ? styles.selectedAssistant : ''}`}
-            onClick={() => onSelect(prompt)}
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {filteredTemplates.map((template) => (
+          <div
+            key={template.title}
+            onClick={() => onSelect(template)}
+            className="cursor-pointer rounded-lg border border-gray-600 bg-gray-700 p-4 transition-all hover:border-blue-500 hover:bg-gray-600"
           >
-            <div className={styles.cardHeader}>
-              <h3 className={styles.promptTitle}>{prompt.title}</h3>
-              <button
-                className={styles.deleteButton}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDelete(prompt.id);
-                }}
-              >
-                Delete
-              </button>
+            <h3 className="mb-2 text-lg font-semibold text-white">{template.title}</h3>
+            <p className="text-sm text-gray-300">{template.description}</p>
+            <div className="mt-2">
+              <span className="inline-block rounded-full bg-blue-500/20 px-2 py-1 text-xs text-blue-300">
+                {template.category}
+              </span>
             </div>
-            <div className={styles.fields}>
-              {prompt.fields.map((field, index) => (
-                <span key={index} className={styles.field}>
-                  {field}
-                </span>
-              ))}
-            </div>
-            <p className={styles.template}>{prompt.template}</p>
           </div>
         ))}
       </div>
+
+      {filteredTemplates.length === 0 && (
+        <div className="text-center text-gray-400">
+          No templates found. Try adjusting your search or category filter.
+        </div>
+      )}
     </div>
-  );
+  )
 } 
