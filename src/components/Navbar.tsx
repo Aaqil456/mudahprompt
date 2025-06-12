@@ -1,74 +1,97 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import styles from '../styles/Navbar.module.css'
+import { createClient } from '@/lib/supabase/client'
 
 interface NavItem {
   href: string
   label: string
+  requiresAuth?: boolean
+  onClick?: () => void
 }
 
 const navItems: NavItem[] = [
   { href: '/', label: 'Home' },
-  { href: '/prompt-assistant', label: 'Prompt Assistant' },
-  { href: '/privacy-policy', label: 'Privacy' },
-  { href: '/terms', label: 'Terms' }
+  { href: '/prompt-assistant', label: 'Prompt Assistant', requiresAuth: true },
+  { href: '/login', label: 'Sign In' }
 ]
 
 export default function Navbar() {
   const pathname = usePathname()
+  const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      setIsAuthenticated(!!session)
+      setIsLoading(false)
+    }
+    checkAuth()
+  }, [])
+
+  const handleSignOut = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    setIsAuthenticated(false)
+    router.push('/')
+  }
+
+  // Redirect to login if trying to access protected route
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated && pathname === '/prompt-assistant') {
+      router.push('/login')
+    }
+  }, [isLoading, isAuthenticated, pathname, router])
+
+  // Filter nav items based on auth state
+  const filteredNavItems = navItems
+    .filter(item => !item.requiresAuth || isAuthenticated)
+    .map(item => {
+      if (item.href === '/login') {
+        return {
+          ...item,
+          href: isAuthenticated ? '#' : '/login',
+          label: isAuthenticated ? 'Sign Out' : 'Sign In',
+          onClick: isAuthenticated ? handleSignOut : undefined
+        }
+      }
+      return item
+    })
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-white">
-              MudahPrompt
-            </Link>
-          </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`px-3 py-2 rounded-md text-sm font-medium ${
-                    pathname === item.href
-                      ? 'text-blue-500'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="md:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
+    <nav className={styles.navbar} style={{ 
+      position: 'fixed',
+      top: 0,
+      borderBottom: '2px solid var(--neon-green)',
+      borderTop: 'none',
+      borderRadius: '0 0 1.2rem 1.2rem',
+      padding: '1rem 0'
+    }}>
+      <div className={styles.navbarInner}>
+        <div className={styles.navbarBrand}>
+          <Link href="/" className={styles.navbarLink}>
+            <span className="text-primary">Mudah</span>
+            <span className="text-white">Prompt</span>
+          </Link>
+        </div>
+        
+        <div className={styles.navbarMenu}>
+          {filteredNavItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={item.onClick}
+              className={`${styles.navbarLink} ${pathname === item.href ? styles.active : ''}`}
             >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="block h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
+              {item.label}
+            </Link>
+          ))}
         </div>
       </div>
     </nav>

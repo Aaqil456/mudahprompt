@@ -13,7 +13,7 @@ export default function LandingPage() {
         <section className={styles.topSection}>
           <div className={styles.explanationBox}>
             <h2 className={styles.heroTitle}>EXPLORE THE POWER OF PROMPTING</h2>
-            <div className={styles.neonText}>ARTIFICIAL<br />INTELLIGENCE</div>
+            <div className={styles.neonText}>PROMPT AGENT</div>
             <div className={styles.heroDesc}>
               <p>
                 Prompting is the art of crafting instructions that guide AI models to generate desired outputs. It&apos;s like having a conversation with an AI, where your words shape the response.

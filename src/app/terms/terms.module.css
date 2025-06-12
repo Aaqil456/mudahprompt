@@ -4,10 +4,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 2rem;
+  margin-top: 4rem;
 }
 
 .landingBg {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 0;
   background: var(--grid-bg);
@@ -18,6 +20,100 @@
   background-image:
     repeating-linear-gradient(0deg, transparent, transparent 23px, var(--grid-dot) 24px),
     repeating-linear-gradient(90deg, transparent, transparent 23px, var(--grid-dot) 24px);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.card {
+  background: rgba(24, 28, 34, 0.85);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--neon-green);
+  border-radius: 1.2rem;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+  padding: 3rem;
+  color: #fff;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--neon-green);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.lastUpdated {
+  text-align: center;
+  color: #888;
+  margin-bottom: 3rem;
+  font-size: 0.9rem;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+  color: var(--neon-green);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.section p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+.section ul {
+  list-style-type: none;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.section ul li {
+  position: relative;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+.section ul li::before {
+  content: "•";
+  color: var(--neon-green);
+  position: absolute;
+  left: -1.5rem;
+}
+
+.contact {
+  color: var(--neon-green) !important;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.3rem;
+  }
 }
 
 .robotCard {
