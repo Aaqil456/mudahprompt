@@ -69,7 +69,7 @@ export default function TermsPage() {
           <div className={styles.section}>
             <h2>7. Contact Information</h2>
             <p>If you have any questions about these Terms and Conditions, please contact us at:</p>
-            <p className={styles.contact}>support@mudahprompt.com</p>
+            <p className={styles.contact}>aautomate123@gmail.com</p>
           </div>
         </div>
       </div>

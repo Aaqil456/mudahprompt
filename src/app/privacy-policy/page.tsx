@@ -83,7 +83,7 @@ export default function PrivacyPolicyPage() {
           <div className={styles.section}>
             <h2>7. Contact Information</h2>
             <p>If you have any questions about our Privacy Policy, please contact us at:</p>
-            <p className={styles.contact}>privacy@mudahprompt.com</p>
+            <p className={styles.contact}>aautomate123@gmail.com</p>
           </div>
         </div>
       </div>
