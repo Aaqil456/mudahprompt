@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import styles from "./PromptAssistant.module.css";
@@ -385,6 +385,7 @@ export default function PromptAssistant() {
   const [editedPrompt, setEditedPrompt] = useState("");
   const [isAssistingWithGemini, setIsAssistingWithGemini] = useState(false);
   const supabase = createClient();
+  const fieldsRef = useRef<HTMLDivElement>(null);
 
   const handleGeneratePrompt = () => {
     if (selectedAssistant && Object.keys(fieldValues).length > 0) {
@@ -455,6 +456,12 @@ export default function PromptAssistant() {
     setSelectedAssistant(assistant);
     setFieldValues({});
     setGeneratedPrompt("");
+
+    if (window.innerWidth < 768 && fieldsRef.current) {
+      setTimeout(() => {
+        fieldsRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 0);
+    }
   };
 
   const handleFieldChange = (field: string, value: string) => {
@@ -495,7 +502,7 @@ export default function PromptAssistant() {
 
         {selectedAssistant && (
           <>
-            <div className={styles.fields}>
+            <div className={styles.fields} ref={fieldsRef}>
               {selectedAssistant.fields.map((field: any) => (
                 <div key={field.name} className={styles.field}>
                   <label className={styles.label}>{field.name}</label>
