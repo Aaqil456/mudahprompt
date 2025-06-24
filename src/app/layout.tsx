@@ -35,7 +35,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-900`}
       >
         <Navbar />
-        <main className="pt-16 min-h-screen">
+        <main
+          className="pt-[80px] pb-[80px] min-h-screen"
+          style={{
+            paddingTop: 'max(80px, env(safe-area-inset-top))',
+            paddingBottom: 'max(80px, env(safe-area-inset-bottom))',
+          }}
+        >
           {children}
         </main>
         <Footer />
