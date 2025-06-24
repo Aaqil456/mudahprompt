@@ -30,11 +30,6 @@ export default function RootLayout({
       <Head>
         <title>Mudah Prompt</title>
         <link rel="icon" href="/mudahprompt.webp" type="image/webp" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4973865817306342"
-          crossOrigin="anonymous"
-        ></script>
       </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-900`}
