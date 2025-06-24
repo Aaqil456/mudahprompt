@@ -27,6 +27,16 @@ body {
   );
   min-height: 100vh;
   font-family: var(--font-digital), sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Glass effect */

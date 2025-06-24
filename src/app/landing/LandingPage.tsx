@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import styles from './landing-page.module.css'
 
 export default function LandingPage() {
@@ -54,6 +55,16 @@ export default function LandingPage() {
             </div>
           </section>
         </section>
+
+        {/* Mobile-only policy links */}
+        <div className={styles.mobilePolicyLinks}>
+          <Link href="/privacy-policy" className={styles.mobilePolicyButton}>
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className={styles.mobilePolicyButton}>
+            Terms & Conditions
+          </Link>
+        </div>
       </main>
     </div>
   )

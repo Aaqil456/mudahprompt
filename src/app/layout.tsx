@@ -32,14 +32,18 @@ export default function RootLayout({
         <link rel="icon" href="/mudahprompt.webp" type="image/webp" />
       </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-900`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 flex flex-col min-h-screen`}
+        style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
       >
         <Navbar />
         <main
-          className="pt-[80px] pb-[80px] min-h-screen"
+          className="pt-[80px] pb-[80px] flex-1"
           style={{
             paddingTop: 'max(80px, env(safe-area-inset-top))',
             paddingBottom: 'max(80px, env(safe-area-inset-bottom))',
+            flex: '1 0 auto',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           {children}
