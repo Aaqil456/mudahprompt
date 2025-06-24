@@ -384,8 +384,20 @@ export default function PromptAssistant() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedPrompt, setEditedPrompt] = useState("");
   const [isAssistingWithGemini, setIsAssistingWithGemini] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const fieldsContainerRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
-  const fieldsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleGeneratePrompt = () => {
     if (selectedAssistant && Object.keys(fieldValues).length > 0) {
@@ -456,11 +468,21 @@ export default function PromptAssistant() {
     setSelectedAssistant(assistant);
     setFieldValues({});
     setGeneratedPrompt("");
-
-    if (window.innerWidth < 768 && fieldsRef.current) {
+    
+    // Auto-scroll to fields container on mobile after a short delay
+    if (isMobile && fieldsContainerRef.current) {
       setTimeout(() => {
-        fieldsRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 0);
+        const element = fieldsContainerRef.current;
+        if (element) {
+          const navbarHeight = 80; // Approximate navbar height
+          const elementPosition = element.offsetTop - navbarHeight - 20; // 20px extra padding
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 150); // Slightly longer delay to ensure DOM is updated
     }
   };
 
@@ -502,7 +524,7 @@ export default function PromptAssistant() {
 
         {selectedAssistant && (
           <>
-            <div className={styles.fields} ref={fieldsRef}>
+            <div ref={fieldsContainerRef} className={styles.inputFields}>
               {selectedAssistant.fields.map((field: any) => (
                 <div key={field.name} className={styles.field}>
                   <label className={styles.label}>{field.name}</label>

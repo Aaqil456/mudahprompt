@@ -24,6 +24,8 @@ export default function Navbar() {
   const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -35,10 +37,22 @@ export default function Navbar() {
     checkAuth()
   }, [])
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const handleSignOut = async () => {
     const supabase = createClient()
     await supabase.auth.signOut()
     setIsAuthenticated(false)
+    setIsMobileMenuOpen(false)
     router.push('/')
   }
 
@@ -64,6 +78,17 @@ export default function Navbar() {
       return item
     })
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const handleNavLinkClick = (onClick?: () => void) => {
+    if (onClick) {
+      onClick()
+    }
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <nav className={styles.navbar} style={{ 
       position: 'fixed',
@@ -81,18 +106,45 @@ export default function Navbar() {
           </Link>
         </div>
         
-        <div className={styles.navbarMenu}>
-          {filteredNavItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={item.onClick}
-              className={`${styles.navbarLink} ${pathname === item.href ? styles.active : ''}`}
+        {isMobile ? (
+          <>
+            <button 
+              className={styles.hamburgerButton}
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
             >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+              <span className={`${styles.hamburgerLine} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+              <span className={`${styles.hamburgerLine} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+              <span className={`${styles.hamburgerLine} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+            </button>
+            
+            <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+              {filteredNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => handleNavLinkClick(item.onClick)}
+                  className={`${styles.mobileNavLink} ${pathname === item.href ? styles.active : ''}`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className={styles.navbarMenu}>
+            {filteredNavItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={item.onClick}
+                className={`${styles.navbarLink} ${pathname === item.href ? styles.active : ''}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   )
