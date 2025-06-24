@@ -64,30 +64,34 @@ export default function Navbar() {
   }, [isLoading, isAuthenticated, pathname, router])
 
   // Filter nav items based on auth state
-  const filteredNavItems = navItems
-    .filter(item => !item.requiresAuth || isAuthenticated)
-    .map(item => {
-      if (item.href === '/login') {
-        return {
-          ...item,
-          href: isAuthenticated ? '#' : '/login',
-          label: isAuthenticated ? 'Sign Out' : 'Sign In',
-          onClick: isAuthenticated ? handleSignOut : undefined
-        }
+  const filteredNavItems = navItems.map(item => {
+    if (item.href === '/login') {
+      return {
+        ...item,
+        href: isAuthenticated ? '#' : '/login',
+        label: isAuthenticated ? 'Sign Out' : 'Sign In',
+        onClick: isAuthenticated ? handleSignOut : undefined
       }
-      return item
-    })
+    }
+    if (item.requiresAuth && !isAuthenticated) {
+      return null;
+    }
+    return item;
+  }).filter(Boolean);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
-  const handleNavLinkClick = (onClick?: () => void) => {
+  const handleNavLinkClick = async (onClick?: () => void, href?: string) => {
     if (onClick) {
-      onClick()
+      await onClick();
     }
-    setIsMobileMenuOpen(false)
-  }
+    // Only close menu after navigation for normal links
+    if (!onClick && href) {
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
     <nav className={styles.navbar} style={{ 
@@ -119,30 +123,36 @@ export default function Navbar() {
             </button>
             
             <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
-              {filteredNavItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => handleNavLinkClick(item.onClick)}
-                  className={`${styles.mobileNavLink} ${pathname === item.href ? styles.active : ''}`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {filteredNavItems.map((item) => {
+                if (!item) return null;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => handleNavLinkClick(item.onClick, item.href)}
+                    className={`${styles.mobileNavLink} ${pathname === item.href ? styles.active : ''}`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
           </>
         ) : (
           <div className={styles.navbarMenu}>
-            {filteredNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={item.onClick}
-                className={`${styles.navbarLink} ${pathname === item.href ? styles.active : ''}`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {filteredNavItems.map((item) => {
+              if (!item) return null;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={item.onClick}
+                  className={`${styles.navbarLink} ${pathname === item.href ? styles.active : ''}`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
         )}
       </div>
