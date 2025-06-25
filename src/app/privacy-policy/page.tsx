@@ -85,6 +85,16 @@ export default function PrivacyPolicyPage() {
             <p>If you have any questions about our Privacy Policy, please contact us at:</p>
             <p className={styles.contact}>aautomate123@gmail.com</p>
           </div>
+
+          <div className={styles.section}>
+            <h2>8. Advertising and Google AdSense</h2>
+            <p>
+              This website utilizes Google AdSense, a service for including advertisements provided by Google Inc. Google AdSense uses cookies and similar technologies to serve ads based on your prior visits to this and other websites. Google and its partners may collect, use, and share data to personalize advertisements. For more information on how Google uses data, please refer to the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a> and the <a href="https://support.google.com/adsense/answer/48182?hl=en" target="_blank" rel="noopener noreferrer">AdSense Program Policies</a>.
+            </p>
+            <p>
+              We are committed to adhering to the AdSense Program Policies and ensuring that advertisements are only displayed on pages containing substantive, original content. Google-served ads are not presented on screens without publisher content, on pages under construction, or on pages used solely for navigation, alerts, or other behavioral purposes. We strive to maintain a high-quality user experience and uphold the standards set forth by Google and industry best practices.
+            </p>
+          </div>
         </div>
       </div>
     </div>
