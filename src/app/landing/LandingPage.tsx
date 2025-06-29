@@ -2,7 +2,9 @@
 
 import Link from 'next/link'
 import { useState, useEffect, useRef } from "react"
+import { useRouter } from 'next/navigation'
 import styles from './landing-page.module.css'
+import { createClient } from '@/lib/supabase/client'
 
 // Queue system for handling AI requests
 class RequestQueue {
@@ -401,6 +403,7 @@ Format agenda dengan masa yang jelas, tanggungjawab yang ditetapkan, dan hasil y
 ];
 
 export default function LandingPage() {
+  const router = useRouter()
   const [selectedAssistant, setSelectedAssistant] = useState<PresetAssistant | null>(null);
   const [fieldValues, setFieldValues] = useState<{ [key: string]: string }>({});
   const [generatedPrompt, setGeneratedPrompt] = useState("");
@@ -408,18 +411,30 @@ export default function LandingPage() {
   const [editedPrompt, setEditedPrompt] = useState("");
   const [isAssistingWithGemini, setIsAssistingWithGemini] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const fieldsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const checkAuth = async () => {
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      setIsAuthenticated(!!session)
+      setIsLoading(false)
+    }
+    checkAuth()
+  }, [])
+
+  useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+      setIsMobile(window.innerWidth < 768)
+    }
     
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
     
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const handleGeneratePrompt = () => {
     if (selectedAssistant && Object.keys(fieldValues).length > 0) {
@@ -528,9 +543,15 @@ export default function LandingPage() {
     }
   };
 
-  const handleCardButtonClick = () => {
-    window.location.href = '/login';
-  };
+  const handleCardButtonClick = async () => {
+    if (isAuthenticated) {
+      // User is logged in, redirect to prompt assistant page
+      router.push('/prompt-assistant')
+    } else {
+      // User is not logged in, redirect to login page
+      router.push('/login')
+    }
+  }
 
   return (
     <div className={styles.container}>
