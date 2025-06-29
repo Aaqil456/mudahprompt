@@ -289,4 +289,918 @@
     color: #fff;
     box-shadow: 0 4px 24px rgba(6, 182, 212, 0.25);
   }
+}
+
+/* Prompt Assistant Section */
+.promptAssistantSection {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.promptAssistantContainer {
+  background: rgba(24, 28, 34, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.promptAssistantTitle {
+  font-family: var(--font-digital);
+  font-size: 2rem;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+.promptAssistantSubtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.promptsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.promptCard {
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.promptCard:hover {
+  border-color: var(--primary-color);
+  background: rgba(31, 41, 55, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+}
+
+.promptCard.selected {
+  border-color: var(--primary-color);
+  background: rgba(6, 182, 212, 0.1);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+.promptTitle {
+  font-family: var(--font-digital);
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.promptDescription {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.field {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--primary-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.inputFields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.inputFields .field {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.label {
+  display: block;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-digital);
+}
+
+.fieldDescription {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+.fieldExample {
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+}
+
+.generateButton {
+  background: linear-gradient(135deg, var(--primary-color), #0891b2);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0.8rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto 2rem;
+  font-family: var(--font-digital);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.generateButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+}
+
+.generateButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.output {
+  background: rgba(31, 41, 55, 0.9);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.outputHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.outputTitle {
+  color: var(--text-primary);
+  font-family: var(--font-digital);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.outputActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--primary-color);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-digital);
+}
+
+.actionButton:hover:not(:disabled) {
+  background: rgba(6, 182, 212, 0.3);
+  border-color: var(--primary-color);
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.outputContent {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-height: 100px;
+}
+
+.promptText {
+  color: var(--text-primary);
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.editTextarea {
+  width: 100%;
+  min-height: 200px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+}
+
+/* Responsive Design for Prompt Assistant */
+@media (max-width: 768px) {
+  .promptAssistantContainer {
+    padding: 1.5rem;
+  }
+
+  .promptAssistantTitle {
+    font-size: 1.5rem;
+  }
+
+  .promptsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .inputFields {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .outputHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .outputActions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .promptAssistantContainer {
+    padding: 1rem;
+  }
+
+  .promptAssistantTitle {
+    font-size: 1.3rem;
+  }
+
+  .generateButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* New Homepage Sections */
+
+/* CTA Button */
+.ctaButton {
+  background: linear-gradient(135deg, var(--primary-color), #0891b2);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0.8rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+  font-family: var(--font-digital);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+}
+
+/* Problem Section */
+.problemSection {
+  margin: 4rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.problemContainer {
+  background: rgba(24, 28, 34, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.problemGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.problemCard {
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.problemCard:hover {
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
+}
+
+.problemIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.problemCard h3 {
+  color: var(--text-primary);
+  font-family: var(--font-digital);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.problemCard p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Features Section */
+.featuresSection {
+  margin: 4rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.featuresContainer {
+  background: rgba(24, 28, 34, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.featureCard {
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.featureCard h3 {
+  color: var(--text-primary);
+  font-family: var(--font-digital);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.featureCard p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Comparison Section */
+.comparisonSection {
+  margin: 4rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.comparisonContainer {
+  background: rgba(24, 28, 34, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.comparisonTable {
+  margin-top: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: rgba(6, 182, 212, 0.1);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableCell {
+  padding: 1rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.tableHeader .tableCell {
+  font-weight: 600;
+  font-family: var(--font-digital);
+  color: var(--primary-color);
+}
+
+/* Use Cases Section */
+.useCasesSection {
+  margin: 4rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.useCasesContainer {
+  background: rgba(24, 28, 34, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.useCasesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.useCaseCard {
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.useCaseCard:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+}
+
+.useCaseIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.useCaseCard h3 {
+  color: var(--text-primary);
+  font-family: var(--font-digital);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.useCaseCard p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.useCaseTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.useCaseTags span {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--primary-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+/* Target Audience Section */
+.audienceSection {
+  margin: 4rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.audienceContainer {
+  background: rgba(24, 28, 34, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.audienceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.audienceCard {
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.audienceCard:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+}
+
+.audienceIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.audienceCard h3 {
+  color: var(--text-primary);
+  font-family: var(--font-digital);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.audienceCard p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Testimonials Section */
+.testimonialsSection {
+  margin: 4rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.testimonialsContainer {
+  background: rgba(24, 28, 34, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.testimonialCard {
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.testimonialCard:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+}
+
+.testimonialStars {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.testimonialCard p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.testimonialAuthor {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+/* Final CTA Section */
+.finalCTASection {
+  margin: 4rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.finalCTAContainer {
+  background: rgba(24, 28, 34, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+  text-align: center;
+}
+
+.finalCTATitle {
+  font-family: var(--font-digital);
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+.finalCTASubtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.finalCTAButton {
+  background: linear-gradient(135deg, var(--primary-color), #0891b2);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0.8rem;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-digital);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+  margin-bottom: 1rem;
+}
+
+.finalCTAButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+}
+
+.finalCTANote {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Assistants Preview */
+.assistantsPreview {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+}
+
+.assistantsTitle {
+  color: var(--text-primary);
+  font-family: var(--font-digital);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.assistantsPreview .promptsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.assistantsPreview .promptCard {
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.assistantsPreview .promptCard:hover {
+  border-color: var(--primary-color);
+  background: rgba(31, 41, 55, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+}
+
+.assistantsPreview .promptTitle {
+  font-family: var(--font-digital);
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.assistantsPreview .promptDescription {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.assistantsPreview .promptDetails {
+  margin-bottom: 1rem;
+}
+
+.assistantsPreview .promptDetails p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.9;
+  font-style: italic;
+}
+
+.assistantsPreview .fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.assistantsPreview .field {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--primary-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.assistantsPreview .cardCTAButton {
+  background: linear-gradient(135deg, var(--primary-color), #0891b2);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-digital);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.assistantsPreview .cardCTAButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+}
+
+/* Section Titles */
+.sectionTitle {
+  font-family: var(--font-digital);
+  font-size: 2rem;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+.sectionSubtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design for New Sections */
+@media (max-width: 768px) {
+  .problemGrid,
+  .featuresGrid,
+  .audienceGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .useCasesGrid,
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .comparisonTable {
+    font-size: 0.8rem;
+  }
+
+  .tableCell {
+    padding: 0.8rem 0.5rem;
+  }
+
+  .finalCTATitle {
+    font-size: 2rem;
+  }
+
+  .finalCTAButton {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .problemContainer,
+  .featuresContainer,
+  .comparisonContainer,
+  .useCasesContainer,
+  .audienceContainer,
+  .testimonialsContainer,
+  .finalCTAContainer {
+    padding: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .finalCTATitle {
+    font-size: 1.8rem;
+  }
 } 

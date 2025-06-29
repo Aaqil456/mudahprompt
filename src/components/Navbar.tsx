@@ -14,9 +14,9 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: '/', label: 'Home' },
-  { href: '/prompt-assistant', label: 'Prompt Assistant', requiresAuth: true },
-  { href: '/login', label: 'Sign In' }
+  { href: '/', label: 'Laman Utama' },
+  { href: '/prompt-assistant', label: 'Pembantu Prompt', requiresAuth: true },
+  { href: '/login', label: 'Log Masuk' }
 ]
 
 export default function Navbar() {
@@ -69,7 +69,7 @@ export default function Navbar() {
       return {
         ...item,
         href: isAuthenticated ? '#' : '/login',
-        label: isAuthenticated ? 'Sign Out' : 'Sign In',
+        label: isAuthenticated ? 'Log Keluar' : 'Log Masuk',
         onClick: isAuthenticated ? handleSignOut : undefined
       }
     }

@@ -69,311 +69,346 @@ interface CustomAssistant {
 const presetAssistants = [
   {
     id: "cold-email",
-    title: "Cold Email Writer",
-    description: "Write professional cold emails with clear CTAs",
+    title: "Penulis Email Dingin",
+    description: "Tulis email professional dengan CTA yang jelas",
     fields: [
       {
-        name: "Recipient's Role",
-        description: "The job title or position of the person you're emailing",
-        example: "e.g., Marketing Director, CEO, HR Manager"
+        name: "Jawatan Penerima",
+        description: "Jawatan atau kedudukan orang yang anda email",
+        example: "cth., Pengarah Pemasaran, CEO, Pengurus HR"
       },
       {
-        name: "Industry",
-        description: "The business sector or field they work in",
-        example: "e.g., Technology, Healthcare, E-commerce"
+        name: "Industri",
+        description: "Sektor perniagaan atau bidang yang mereka kerja",
+        example: "cth., Teknologi, Kesihatan, E-dagang"
       },
       {
-        name: "Pain Point",
-        description: "The main problem or challenge they're facing",
-        example: "e.g., Low customer retention, High operational costs"
+        name: "Masalah Utama",
+        description: "Masalah atau cabaran utama yang mereka hadapi",
+        example: "cth., Pengurangan pelanggan, Kos operasi tinggi"
       },
       {
-        name: "Your Solution",
-        description: "How your product/service solves their problem",
-        example: "e.g., AI-powered analytics platform that reduces churn by 30%"
+        name: "Penyelesaian Anda",
+        description: "Bagaimana produk/perkhidmatan anda selesaikan masalah mereka",
+        example: "cth., Platform analitik AI yang kurangkan pengurangan pelanggan sebanyak 30%"
       },
       {
-        name: "Call to Action",
-        description: "What you want them to do next",
-        example: "e.g., Schedule a 15-minute demo, Download our case study"
+        name: "Tindakan Seterusnya",
+        description: "Apa yang anda mahu mereka lakukan seterusnya",
+        example: "cth., Jadual demo 15 minit, Muat turun kajian kes kami"
       },
       {
-        name: "Tone",
-        description: "The overall style and mood of the email",
-        example: "e.g., Professional, Conversational, Enthusiastic"
+        name: "Nada",
+        description: "Gaya dan mood keseluruhan email",
+        example: "cth., Professional, Santai, Bersemangat"
       },
       {
-        name: "Length",
-        description: "Approximate word count for the email",
-        example: "e.g., 150-200 words, 200-250 words"
+        name: "Panjang",
+        description: "Anggaran bilangan perkataan untuk email",
+        example: "cth., 150-200 perkataan, 200-250 perkataan"
       }
     ],
-    template: `Write a professional cold email with the following details:
+    template: `Tulis email dingin yang professional dengan butiran berikut:
 
-Recipient's Role: [recipientsrole]
-Industry: [industry]
-Pain Point: [painpoint]
-Your Solution: [yoursolution]
-Call to Action: [calltoaction]
-Tone: [tone]
-Length: [length]
+Jawatan Penerima: [jawatanpenerima]
+Industri: [industri]
+Masalah Utama: [masalahutama]
+Penyelesaian Anda: [penyelesaiananda]
+Tindakan Seterusnya: [tindakanseterusnya]
+Nada: [nada]
+Panjang: [panjang]
 
-Guidelines:
-- Start with a personalized hook that shows you've done your research
-- Address the specific pain point they're facing
-- Present your solution as a natural fit for their needs
-- Include social proof or relevant statistics
-- End with a clear, specific call to action
-- Keep the tone [tone] and professional
-- Maintain a length of approximately [length] words
+Panduan:
+- Mulakan dengan hook yang peribadi yang tunjukkan anda telah buat penyelidikan
+- Alamatkan masalah utama yang mereka hadapi
+- Persembahkan penyelesaian anda sebagai yang sesuai untuk keperluan mereka
+- Sertakan bukti sosial atau statistik yang relevan
+- Akhiri dengan tindakan seterusnya yang jelas dan spesifik
+- Kekalkan nada [nada] dan professional
+- Kekalkan panjang kira-kira [panjang] perkataan
 
-Format the email with proper spacing and structure.`
+Format email dengan jarak dan struktur yang betul.`
   },
   {
     id: "youtube-summary",
-    title: "YouTube Summarizer",
-    description: "Summarize YouTube videos into clear 3-paragraph summaries",
+    title: "Peringkas YouTube",
+    description: "Ringkaskan video YouTube kepada 3 perenggan yang jelas",
     fields: [
       {
-        name: "Video Topic",
-        description: "The main subject or theme of the video",
-        example: "e.g., How to Start a Business, Machine Learning Basics"
+        name: "Topik Video",
+        description: "Subjek atau tema utama video",
+        example: "cth., Cara Mulakan Perniagaan, Asas Pembelajaran Mesin"
       },
       {
-        name: "Key Points",
-        description: "Main ideas or takeaways from the video",
-        example: "e.g., 1. Market research 2. Business plan 3. Funding options"
+        name: "Poin Utama",
+        description: "Idea utama atau pengajaran dari video",
+        example: "cth., 1. Penyelidikan pasaran 2. Pelan perniagaan 3. Pilihan pembiayaan"
       },
       {
-        name: "Target Audience",
-        description: "Who the video is intended for",
-        example: "e.g., Beginners, Professionals, Students"
+        name: "Audience Sasaran",
+        description: "Siapa yang video ini ditujukan",
+        example: "cth., Pemula, Profesional, Pelajar"
       },
       {
-        name: "Summary Style",
-        description: "How formal or casual the summary should be",
-        example: "e.g., Academic, Casual, Technical"
+        name: "Gaya Ringkasan",
+        description: "Betapa formal atau santai ringkasan sepatutnya",
+        example: "cth., Akademik, Santai, Teknikal"
       },
       {
-        name: "Include Timestamps",
-        description: "Whether to include video timestamps",
-        example: "e.g., yes/no"
+        name: "Sertakan Timestamp",
+        description: "Sama ada untuk sertakan timestamp video",
+        example: "cth., ya/tidak"
       }
     ],
-    template: `Create a comprehensive summary of the YouTube video with these details:
+    template: `Cipta ringkasan komprehensif video YouTube dengan butiran ini:
 
-Video Topic: [videotopic]
-Key Points: [keypoints]
-Target Audience: [targetaudience]
-Summary Style: [summarystyle]
-Include Timestamps: [includetimestamps]
+Topik Video: [topikvideo]
+Poin Utama: [poinutama]
+Audience Sasaran: [audiencesasaran]
+Gaya Ringkasan: [gayaringkasan]
+Sertakan Timestamp: [sertakantimestamp]
 
-Guidelines:
-- Start with a brief overview of the video's main topic
-- Break down the key points into clear, digestible sections
-- Highlight any actionable insights or takeaways
-- Use [summarystyle] language appropriate for [targetaudience]
-- [includetimestamps === 'yes' ? 'Include relevant timestamps for key moments' : 'Focus on the content without timestamps']
-- Maintain a professional yet engaging tone
-- Ensure the summary is comprehensive but concise
+Panduan:
+- Mulakan dengan gambaran ringkas topik utama video
+- Bahagikan poin utama kepada bahagian yang jelas dan mudah difahami
+- Highlight sebarang insight atau pengajaran yang boleh diambil tindakan
+- Gunakan bahasa [gayaringkasan] yang sesuai untuk [audiencesasaran]
+- [sertakantimestamp === 'ya' ? 'Sertakan timestamp yang relevan untuk saat-saat penting' : 'Fokus pada kandungan tanpa timestamp']
+- Kekalkan nada professional namun menarik
+- Pastikan ringkasan komprehensif tetapi ringkas
 
-Format the summary with clear headings and bullet points where appropriate.`
+Format ringkasan dengan tajuk yang jelas dan bullet point di mana sesuai.`
   },
   {
     id: "social-hook",
-    title: "Social Media Hook Generator",
-    description: "Generate catchy hooks for social media posts",
+    title: "Penjana Hook Media Sosial",
+    description: "Jana hook yang menarik untuk post media sosial",
     fields: [
       {
         name: "Platform",
-        description: "The social media platform you're posting on",
-        example: "e.g., Instagram, LinkedIn, Twitter"
+        description: "Platform media sosial yang anda post",
+        example: "cth., Instagram, LinkedIn, Twitter"
       },
       {
-        name: "Content Type",
-        description: "The type of content you're creating",
-        example: "e.g., Product Launch, How-to Guide, Success Story"
+        name: "Jenis Kandungan",
+        description: "Jenis kandungan yang anda cipta",
+        example: "cth., Pelancaran Produk, Panduan Cara, Kisah Kejayaan"
       },
       {
-        name: "Target Audience",
-        description: "Who you want to reach with your post",
-        example: "e.g., Entrepreneurs, Tech Professionals, Fitness Enthusiasts"
+        name: "Audience Sasaran",
+        description: "Siapa yang anda mahu capai dengan post anda",
+        example: "cth., Usahawan, Profesional Teknologi, Peminat Kecergasan"
       },
       {
-        name: "Tone",
-        description: "The mood or style of your hook",
-        example: "e.g., Humorous, Inspirational, Educational"
+        name: "Nada",
+        description: "Mood atau gaya hook anda",
+        example: "cth., Lucu, Inspirasi, Pendidikan"
       },
       {
-        name: "Key Message",
-        description: "The main point you want to convey",
-        example: "e.g., Our new AI tool saves 5 hours per week"
+        name: "Mesej Utama",
+        description: "Poin utama yang anda mahu sampaikan",
+        example: "cth., Alat AI baru kami jimat 5 jam seminggu"
       },
       {
-        name: "Hook Style",
-        description: "The approach to grab attention",
-        example: "e.g., Question, Story, Shocking Statistic"
+        name: "Gaya Hook",
+        description: "Pendekatan untuk menarik perhatian",
+        example: "cth., Soalan, Kisah, Statistik Mengejutkan"
       }
     ],
-    template: `Generate engaging social media hooks with these specifications:
+    template: `Jana hook media sosial yang menarik dengan spesifikasi ini:
 
 Platform: [platform]
-Content Type: [contenttype]
-Target Audience: [targetaudience]
-Tone: [tone]
-Key Message: [keymessage]
-Hook Style: [hookstyle]
+Jenis Kandungan: [jeniskandungan]
+Audience Sasaran: [audiencesasaran]
+Nada: [nada]
+Mesej Utama: [mesejutama]
+Gaya Hook: [gayahook]
 
-Guidelines:
-- Create hooks that grab attention within the first few words
-- Use [hookstyle] techniques (e.g., questions, statements, stories)
-- Match the tone to [platform] best practices
-- Incorporate relevant emojis and formatting
-- Ensure the hook leads naturally to [keymessage]
-- Keep the language appropriate for [targetaudience]
-- Optimize for [platform]'s character limits and engagement patterns
+Panduan:
+- Cipta hook yang menarik perhatian dalam beberapa perkataan pertama
+- Gunakan teknik [gayahook] (cth., soalan, kenyataan, kisah)
+- Padankan nada dengan amalan terbaik [platform]
+- Gabungkan emoji dan format yang relevan
+- Pastikan hook membawa secara semula jadi kepada [mesejutama]
+- Kekalkan bahasa yang sesuai untuk [audiencesasaran]
+- Optimumkan untuk had aksara [platform] dan corak engagement
 
-Generate 3 different hooks, each with a unique approach.`
+Jana 3 hook berbeza, setiap satu dengan pendekatan unik.`
   },
   {
-    id: "translator",
-    title: "Casual Translator",
-    description: "Translate text with a casual tone",
+    id: "blog-outline",
+    title: "Penjana Outline Blog",
+    description: "Strukturkan idea blog dengan outline yang lengkap",
     fields: [
       {
-        name: "Source Language",
-        description: "The original language of the text",
-        example: "e.g., English, Spanish, Japanese"
+        name: "Tajuk Blog",
+        description: "Tajuk atau topik utama artikel blog",
+        example: "cth., Cara Tingkatkan Jualan Online, Tips Kesihatan Mental"
       },
       {
-        name: "Target Language",
-        description: "The language to translate into",
-        example: "e.g., French, German, Chinese"
+        name: "Audience Sasaran",
+        description: "Siapa yang akan baca artikel ini",
+        example: "cth., Usahawan, Pelajar, Ibu Bapa"
       },
       {
-        name: "Content Type",
-        description: "The type of content being translated",
-        example: "e.g., Blog Post, Social Media, Email"
+        name: "Objektif Artikel",
+        description: "Apa yang anda mahu capai dengan artikel ini",
+        example: "cth., Didik, Hibur, Jual, Bangunkan Authority"
       },
       {
-        name: "Tone",
-        description: "The mood or style of the translation",
-        example: "e.g., Casual, Professional, Humorous"
+        name: "Poin Utama",
+        description: "Idea utama yang akan dibincangkan",
+        example: "cth., 1. Definisi 2. Kepentingan 3. Cara Implementasi"
       },
       {
-        name: "Formality Level",
-        description: "How formal the translation should be",
-        example: "e.g., Very Formal, Semi-formal, Very Casual"
+        name: "Gaya Penulisan",
+        description: "Nada dan pendekatan artikel",
+        example: "cth., Formal, Santai, Teknikal, Bercerita"
       },
       {
-        name: "Cultural Context",
-        description: "Any cultural considerations for the translation",
-        example: "e.g., Business Culture, Youth Culture, Academic"
+        name: "Panjang Artikel",
+        description: "Anggaran bilangan perkataan",
+        example: "cth., 500-800 perkataan, 1000-1500 perkataan"
       }
     ],
-    template: `Translate the following text with these specifications:\n\nSource Language: [sourcelanguage]\nTarget Language: [targetlanguage]\nContent Type: [contenttype]\nTone: [tone]\nFormality Level: [formalitylevel]\nCultural Context: [culturalcontext]\n\nGuidelines:\n- Maintain the original meaning while adapting to [targetlanguage] cultural nuances\n- Use [tone] language appropriate for [contenttype]\n- Adjust formality to [formalitylevel] level\n- Consider [culturalcontext] in the translation\n- Preserve any idioms or expressions in a culturally appropriate way\n- Ensure the translation flows naturally in [targetlanguage]\n- Keep the translation engaging and authentic\n\nProvide both the translation and a brief explanation of any cultural adaptations made.`,
+    template: `Cipta outline blog yang lengkap dengan butiran ini:
+
+Tajuk Blog: [tajukblog]
+Audience Sasaran: [audiencesasaran]
+Objektif Artikel: [objektifartikel]
+Poin Utama: [poinutama]
+Gaya Penulisan: [gayapenulisan]
+Panjang Artikel: [panjangartikel]
+
+Panduan:
+- Mulakan dengan pengenalan yang menarik dan relevan
+- Bahagikan [poinutama] kepada bahagian yang logik dan tersusun
+- Sertakan contoh, statistik, atau kisah yang menyokong setiap poin
+- Pastikan flow yang natural dari satu bahagian ke bahagian seterusnya
+- Akhiri dengan kesimpulan yang kuat dan call-to-action
+- Gunakan gaya [gayapenulisan] yang sesuai untuk [audiencesasaran]
+- Kekalkan panjang kira-kira [panjangartikel] perkataan
+
+Format outline dengan tajuk bahagian, sub-bahagian, dan bullet point untuk poin-poin utama.`
   },
   {
-    id: "veo_3_video_gen",
-    title: "veo 3 video gen",
-    description: "Generate videos using Veo 3 model",
+    id: "product-description",
+    title: "Penulis Deskripsi Produk",
+    description: "Tulis deskripsi produk yang menjual",
     fields: [
       {
-        name: "Concept",
-        description: "The complex idea or topic to explain",
-        example: "e.g., How the Internet Works, What is Bitcoin"
+        name: "Nama Produk",
+        description: "Nama produk yang anda jual",
+        example: "cth., iPhone 14 Pro, Nike Air Max"
       },
       {
-        name: "Age Level",
-        description: "The target age group for the explanation",
-        example: "e.g., 5, 8, 10 years old"
+        name: "Jenis Produk",
+        description: "Kategori produk",
+        example: "cth., Telefon Pintar, Kasut Larian, Perisian"
       },
       {
-        name: "Key Points",
-        description: "The main ideas to cover in the explanation",
-        example: "e.g., 1. Basic definition 2. How it's used 3. Why it matters"
+        name: "Audience Sasaran",
+        description: "Siapa yang akan beli produk ini",
+        example: "cth., Peminat Teknologi, Atlet, Profesional"
       },
       {
-        name: "Examples Needed",
-        description: "What kind of examples to include",
-        example: "e.g., Real-world scenarios, Simple analogies"
+        name: "Ciri Utama",
+        description: "Ciri-ciri utama yang perlu dihighlight",
+        example: "cth., Jangka hayat bateri, Kualiti kamera, Keselesaan"
       },
       {
-        name: "Visual Elements",
-        description: "Visual aids to help explain the concept",
-        example: "e.g., Simple diagrams, Everyday objects"
+        name: "Masalah Yang Diselesaikan",
+        description: "Masalah yang produk ini selesaikan",
+        example: "cth., Masa yang terbuang, Ketidakcekapan, Kos tinggi"
       },
       {
-        name: "Learning Style",
-        description: "How the audience best learns",
-        example: "e.g., Visual, Hands-on, Story-based"
+        name: "Nada",
+        description: "Gaya dan mood deskripsi",
+        example: "cth., Professional, Santai, Bersemangat"
+      },
+      {
+        name: "Panjang",
+        description: "Anggaran bilangan perkataan",
+        example: "cth., 100-150 perkataan, 200-300 perkataan"
       }
     ],
-    template: `Please provide details for generating a cinematic video scene using the following structure. Fill in the relevant sections below. You can leave optional sections blank.\n\nScene Description: Describe the location, time of day, setting, and overall mood (e.g., "A misty forest trail at sunrise").\nKey Visual Elements: List specific elements that must appear (e.g., "Cherry blossom trees swaying in the wind").\nCharacters (Optional):\n- Description: Describe characters (appearance, clothing, action).\n- Action: What are they doing?\nDialogue (Optional):\n- Style: (e.g., Casual, dramatic).\n- Text: ["Write the dialogue"].\n- Language/Accent (Optional): (e.g., English, British accent).\nCamera Style & Movement (Optional): Describe camera movement and angles (e.g., "slow pan," "wide shot").\nLighting & Atmosphere (Optional): Describe the visual tone (e.g., "warm golden hour," "foggy").\nBackground Audio (Optional): Include ambiance or music style (e.g., "rainfall," "soft piano").\nDuration: Approximate duration (e.g., 10 seconds).\nStyle or Inspiration (Optional): Mention a style or reference (e.g., "Studio Ghibli").\nOutput Instructions (Internal Guidance - No need to edit this section): Create the video in 16:9 aspect ratio, with smooth transitions, cinematic color grading, and no text or logos.\n\n---\nYour Input Below This Line:\n`,
+    template: `Tulis deskripsi produk yang menjual dengan butiran ini:
+
+Nama Produk: [namaproduk]
+Jenis Produk: [jenisproduk]
+Audience Sasaran: [audiencesasaran]
+Ciri Utama: [cirutama]
+Masalah Yang Diselesaikan: [masalahyangdiselesaikan]
+Nada: [nada]
+Panjang: [panjang]
+
+Panduan:
+- Mulakan dengan hook yang menarik perhatian
+- Highlight [cirutama] yang paling penting
+- Jelaskan bagaimana produk selesaikan [masalahyangdiselesaikan]
+- Gunakan bahasa yang meyakinkan dan menarik
+- Sertakan benefit yang jelas untuk [audiencesasaran]
+- Kekalkan nada [nada] dan professional
+- Akhiri dengan call-to-action yang kuat
+- Kekalkan panjang kira-kira [panjang] perkataan
+
+Format deskripsi dengan tajuk yang menarik, bullet point untuk ciri-ciri, dan kesimpulan yang meyakinkan.`
   },
   {
-    id: "product-review",
-    title: "Product Review Writer",
-    description: "Write engaging product reviews",
+    id: "meeting-agenda",
+    title: "Perancang Agenda Mesyuarat",
+    description: "Rancang agenda mesyuarat yang produktif",
     fields: [
       {
-        name: "Product Name",
-        description: "The name of the product being reviewed",
-        example: "e.g., iPhone 14 Pro, Nike Air Max"
+        name: "Jenis Mesyuarat",
+        description: "Jenis atau tujuan mesyuarat",
+        example: "cth., Mesyuarat Projek, Brainstorming, Review Bulanan"
       },
       {
-        name: "Product Type",
-        description: "The category of the product",
-        example: "e.g., Smartphone, Running Shoes, Software"
+        name: "Tempoh Mesyuarat",
+        description: "Berapa lama mesyuarat akan berlangsung",
+        example: "cth., 30 minit, 1 jam, 2 jam"
       },
       {
-        name: "Target Audience",
-        description: "Who the review is written for",
-        example: "e.g., Tech Enthusiasts, Athletes, Professionals"
+        name: "Objektif Utama",
+        description: "Apa yang perlu dicapai dalam mesyuarat",
+        example: "cth., Buat keputusan, Kongsi kemajuan, Selesaikan masalah"
       },
       {
-        name: "Key Features",
-        description: "Main features to highlight in the review",
-        example: "e.g., Battery life, Camera quality, Comfort"
+        name: "Peserta",
+        description: "Siapa yang akan hadir",
+        example: "cth., Pasukan Pemasaran, Pengurus Projek, CEO"
       },
       {
-        name: "Pros and Cons",
-        description: "Main advantages and disadvantages",
-        example: "e.g., Pros: Fast performance, Great design. Cons: Expensive, Limited storage"
+        name: "Topik Utama",
+        description: "Topik utama yang akan dibincangkan",
+        example: "cth., 1. Kemajuan Projek 2. Cabaran 3. Langkah Seterusnya"
       },
       {
-        name: "Rating",
-        description: "Overall rating out of 5 or 10",
-        example: "e.g., 4.5/5, 9/10"
-      },
-      {
-        name: "Review Style",
-        description: "The tone and approach of the review",
-        example: "e.g., Technical, Casual, Professional"
+        name: "Hasil Yang Diharapkan",
+        description: "Apa yang diharapkan selepas mesyuarat",
+        example: "cth., Keputusan yang jelas, Tindakan yang ditetapkan, Pelan yang disetujui"
       }
     ],
-    template: `Write a comprehensive product review with these details:
+    template: `Rancang agenda mesyuarat yang produktif dengan butiran ini:
 
-Product Name: [productname]
-Product Type: [producttype]
-Target Audience: [targetaudience]
-Key Features: [keyfeatures]
-Pros and Cons: [prosandcons]
-Rating: [rating]
-Review Style: [reviewstyle]
+Jenis Mesyuarat: [jenismesyuarat]
+Tempoh Mesyuarat: [tempohmesyuarat]
+Objektif Utama: [objektifutama]
+Peserta: [peserta]
+Topik Utama: [topikutama]
+Hasil Yang Diharapkan: [hasilyangdiharapkan]
 
-Guidelines:
-- Start with a compelling introduction that captures attention
-- Provide a clear overview of [productname]
-- Detail the key features: [keyfeatures]
-- Present balanced pros and cons
-- Include specific examples and use cases
-- Compare with similar products in the market
-- Provide a clear rating and justification
-- Use [reviewstyle] writing style appropriate for [targetaudience]
-- Include a strong conclusion with a clear recommendation
+Panduan:
+- Mulakan dengan pengenalan dan objektif mesyuarat
+- Bahagikan masa dengan bijak untuk setiap topik
+- Sertakan masa untuk soalan dan perbincangan
+- Pastikan setiap peserta faham tanggungjawab mereka
+- Tetapkan masa yang jelas untuk setiap bahagian
+- Akhiri dengan ringkasan dan tindakan seterusnya
+- Pastikan agenda membawa kepada [hasilyangdiharapkan]
 
-Format the review with clear sections, bullet points for features, and a rating summary.`
+Format agenda dengan masa yang jelas, tanggungjawab yang ditetapkan, dan hasil yang diharapkan.`
   }
 ];
 

@@ -18,14 +18,14 @@ export default function LoginPage() {
     <div className={styles.loginContainer}>
       <div className={styles.loginBg} />
       <div className={styles.loginCard}>
-        <h1 className={styles.loginTitle}>Welcome to MudahPrompt</h1>
-        <p className={styles.loginDesc}>Sign in to access your account</p>
+        <h1 className={styles.loginTitle}>Selamat Datang ke MudahPrompt</h1>
+        <p className={styles.loginDesc}>Log masuk untuk mengakses akaun anda</p>
         
         <button
           onClick={handleGoogleLogin}
           className={styles.neonButton}
         >
-          Sign in with Google
+          Log masuk dengan Google
         </button>
       </div>
     </div>
