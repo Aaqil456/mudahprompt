@@ -10,8 +10,6 @@ export default function ContactPage() {
     subject: '',
     message: ''
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -21,32 +19,28 @@ export default function ContactPage() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
+    
+    // Create mailto link with form data
+    const mailtoLink = `mailto:aautomate123@gmail.com?subject=MudahPrompt Contact - ${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`
+Nama: ${formData.name}
+Email: ${formData.email}
+Subjek: ${formData.subject}
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
+Mesej:
+${formData.message}
 
-      if (response.ok) {
-        setSubmitStatus('success')
-        setFormData({ name: '', email: '', subject: '', message: '' })
-      } else {
-        setSubmitStatus('error')
-      }
-    } catch (error) {
-      console.error('Error sending message:', error)
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
+---
+Mesej ini dihantar dari MudahPrompt Contact Form
+Tarikh: ${new Date().toLocaleString('ms-MY', { timeZone: 'Asia/Kuala_Lumpur' })}
+    `)}`
+    
+    // Open user's email client
+    window.open(mailtoLink)
+    
+    // Reset form
+    setFormData({ name: '', email: '', subject: '', message: '' })
   }
 
   return (
@@ -141,23 +135,10 @@ export default function ContactPage() {
 
             <button 
               type="submit" 
-              disabled={isSubmitting}
               className={styles.submitButton}
             >
-              {isSubmitting ? 'Menghantar...' : 'Hantar Mesej'}
+              Hantar Mesej
             </button>
-
-            {submitStatus === 'success' && (
-              <div className={styles.successMessage}>
-                ✅ Mesej anda telah dihantar! Kami akan membalas dalam masa 24-48 jam.
-              </div>
-            )}
-
-            {submitStatus === 'error' && (
-              <div className={styles.errorMessage}>
-                ❌ Ralat menghantar mesej. Sila cuba lagi atau hantar email terus ke aautomate123@gmail.com
-              </div>
-            )}
           </form>
 
           <div className={styles.faqSection}>
