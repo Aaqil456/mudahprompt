@@ -378,6 +378,49 @@ Panduan:
 - Boleh tarik creator kecil & influencer baru
 
 Format idea dengan tajuk, konsep, format, dan angle yang jelas untuk setiap idea.`
+  },
+  {
+    id: "shopee-thread-ig",
+    title: "🧵 Penulis Thread Instagram Shopee Affiliate",
+    description: "Cipta post Threads gaya borak mamak yang jual barang Shopee guna link affiliate.",
+    fields: [
+      {
+        name: "Nama Produk",
+        description: "Nama produk yang anda nak promosikan",
+        example: "cth., Mesin Basuh Mini Portable, Air Fryer, Kasut Jalan Anti Licin"
+      },
+      {
+        name: "Fungsi Produk",
+        description: "Apa kegunaan utama produk ini",
+        example: "cth., Cuci baju tanpa mesin besar, Masak tanpa minyak, Elak tergelincir masa hujan"
+      },
+      {
+        name: "Kenapa Best",
+        description: "2–3 sebab kenapa orang suka produk ni",
+        example: "cth., Jimat ruang, Senyap masa guna, Harga berbaloi"
+      },
+      {
+        name: "Harga",
+        description: "Julat harga produk",
+        example: "cth., RM59 – RM89"
+      },
+      {
+        name: "Nada & Gaya",
+        description: "Gaya penulisan yang anda nak (borak, sarkastik, chill)",
+        example: "cth., Borak mamak, Sarkastik malas, Abang influencer, Lucu chill"
+      },
+      {
+        name: "Audience Sasaran",
+        description: "Siapa yang sesuai beli produk ni",
+        example: "cth., Student bujang, Mak-mak, Housemate, Traveller"
+      },
+      {
+        name: "Link Affiliate",
+        description: "Link affiliate Shopee anda",
+        example: "cth., https://shope.ee/xxxxxxx"
+      }
+    ],
+    template: `Anda adalah penulis content yang kelakar dan pandai sindir manja, tugas anda adalah hasilkan thread Instagram gaya "borak mamak" yang boleh tarik perhatian dan buat orang nak beli.\n\nProduk: [namaproduk]\nFungsi: [fungsiproduk]\nKenapa Best: [kenapabest]\nHarga: [harga]\nNada & Gaya: [nada&gaya]\nAudience Sasaran: [audiencesasaran]\nLink Affiliate: [linkaffiliate]\n\nPanduan:\n- Mulakan dengan hook yang lucu atau relatable (boleh sindir sikit audience)\n- Sambung dengan cerita atau situasi harian yang buat orang terasa\n- Kaitkan fungsi & kelebihan produk dengan gaya [nada&gaya] sesuai untuk [audiencesasaran]\n- Letak harga dan sebab kenapa wajib grab\n- Akhiri dengan CTA santai: "📌 Link Shopee kat bawah ni,"\n\nTulis 4–6 post pendek bergaya Threads (1–3 ayat per post), guna emoji dan gaya casual Malaysia.\n\nAkhir sekali, selitkan:\n [linkaffiliate]`
   }
 ];
 
@@ -391,6 +434,7 @@ export default function PromptAssistant() {
   const [isMobile, setIsMobile] = useState(false);
   const fieldsContainerRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
+  const [geminiAnswer, setGeminiAnswer] = useState("");
 
   useEffect(() => {
     const checkMobile = () => {
@@ -438,7 +482,8 @@ export default function PromptAssistant() {
   };
 
   const handleGeminiAssist = async () => {
-    if (!editedPrompt || !selectedAssistant) return;
+    const promptToSend = isEditing ? editedPrompt : generatedPrompt;
+    if (!promptToSend || !selectedAssistant) return;
 
     setIsAssistingWithGemini(true);
     try {
@@ -448,7 +493,11 @@ export default function PromptAssistant() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ promptText: editedPrompt, assistantId: selectedAssistant.id }),
+          body: JSON.stringify({ 
+            promptText: promptToSend, 
+            assistantId: selectedAssistant.id,
+            systemInstruction: "Answer the following prompt directly and completely. Use the same language as the prompt. Return your answer as a single, clear response."
+          }),
         });
 
         if (!response.ok) {
@@ -457,7 +506,7 @@ export default function PromptAssistant() {
 
         const data = await response.json();
         if (data.revisedPrompt) {
-          setEditedPrompt(data.revisedPrompt);
+          setGeminiAnswer(data.revisedPrompt);
         }
       });
     } catch (error) {
@@ -472,22 +521,18 @@ export default function PromptAssistant() {
     setSelectedAssistant(assistant);
     setFieldValues({});
     setGeneratedPrompt("");
-    
-    // Auto-scroll to fields container on mobile after a short delay
-    if (isMobile && fieldsContainerRef.current) {
-      setTimeout(() => {
-        const element = fieldsContainerRef.current;
-        if (element) {
-          const navbarHeight = 80; // Approximate navbar height
-          const elementPosition = element.offsetTop - navbarHeight - 20; // 20px extra padding
-          
-          window.scrollTo({
-            top: elementPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 150); // Slightly longer delay to ensure DOM is updated
-    }
+    // Auto-scroll to fields container on both mobile and desktop after a short delay
+    setTimeout(() => {
+      const element = fieldsContainerRef.current;
+      if (element) {
+        const navbarHeight = 80; // Approximate navbar height
+        const elementPosition = element.offsetTop - navbarHeight - 20; // 20px extra padding
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 150); // Slightly longer delay to ensure DOM is updated
   };
 
   const handleFieldChange = (field: string, value: string) => {
@@ -528,6 +573,7 @@ export default function PromptAssistant() {
 
         {selectedAssistant && (
           <>
+            <h2 className={styles.selectedAssistantTitle}>{selectedAssistant.title}</h2>
             <div ref={fieldsContainerRef} className={styles.inputFields}>
               {selectedAssistant.fields.map((field: any) => (
                 <div key={field.name} className={styles.field}>
@@ -581,15 +627,13 @@ export default function PromptAssistant() {
                     >
                       Copy
                     </button>
-                    {isEditing && (
-                      <button
-                        className={styles.actionButton}
-                        onClick={handleGeminiAssist}
-                        disabled={isAssistingWithGemini}
-                      >
-                        {isAssistingWithGemini ? 'Asking...' : 'Ask Gemini'}
-                      </button>
-                    )}
+                    <button
+                      className={styles.actionButton}
+                      onClick={handleGeminiAssist}
+                      disabled={isAssistingWithGemini}
+                    >
+                      {isAssistingWithGemini ? 'Asking...' : 'Ask Gemini'}
+                    </button>
                   </div>
                 </div>
                 <textarea
@@ -598,6 +642,16 @@ export default function PromptAssistant() {
                   onChange={(e) => setEditedPrompt(e.target.value)}
                   readOnly={!isEditing}
                 />
+                {geminiAnswer && (
+                  <div className={styles.geminiAnswerArea}>
+                    <h3 className={styles.outputTitle}>Gemini Answer</h3>
+                    <textarea
+                      className={styles.outputTextarea}
+                      value={geminiAnswer}
+                      readOnly
+                    />
+                  </div>
+                )}
               </div>
             )}
           </>
