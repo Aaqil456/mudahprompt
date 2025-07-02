@@ -380,47 +380,65 @@ Panduan:
 Format idea dengan tajuk, konsep, format, dan angle yang jelas untuk setiap idea.`
   },
   {
-    id: "shopee-thread-ig",
-    title: "🧵 Penulis Thread Instagram Shopee Affiliate",
-    description: "Cipta post Threads gaya borak mamak yang jual barang Shopee guna link affiliate.",
+    id: "selling-thread-ig",
+    title: "🧵 Penulis Thread Instagram Jualan Produk Sendiri",
+    description: "Cipta thread Instagram gaya borak mamak untuk jual produk sendiri (digital/fizikal, ebook, kursus, dll.) secara direct.",
     fields: [
       {
         name: "Nama Produk",
-        description: "Nama produk yang anda nak promosikan",
-        example: "cth., Mesin Basuh Mini Portable, Air Fryer, Kasut Jalan Anti Licin"
+        description: "Nama produk yang anda nak jual",
+        example: "cth., Ebook Rahsia Bisnes, Kursus Canva, Baju Muslimah, Software Kewangan"
       },
       {
-        name: "Fungsi Produk",
-        description: "Apa kegunaan utama produk ini",
-        example: "cth., Cuci baju tanpa mesin besar, Masak tanpa minyak, Elak tergelincir masa hujan"
+        name: "Jenis Produk",
+        description: "Jenis produk (Digital/Fizikal)",
+        example: "cth., Digital, Fizikal"
       },
       {
-        name: "Kenapa Best",
-        description: "2–3 sebab kenapa orang suka produk ni",
-        example: "cth., Jimat ruang, Senyap masa guna, Harga berbaloi"
+        name: "Kelebihan Produk",
+        description: "3 sebab utama kenapa produk ini best",
+        example: "cth., Mudah digunakan, Harga berbaloi, Support sepanjang tahun"
       },
       {
         name: "Harga",
-        description: "Julat harga produk",
-        example: "cth., RM59 – RM89"
-      },
-      {
-        name: "Nada & Gaya",
-        description: "Gaya penulisan yang anda nak (borak, sarkastik, chill)",
-        example: "cth., Borak mamak, Sarkastik malas, Abang influencer, Lucu chill"
+        description: "Harga produk",
+        example: "cth., RM49, RM199, RM99/bulan"
       },
       {
         name: "Audience Sasaran",
         description: "Siapa yang sesuai beli produk ni",
-        example: "cth., Student bujang, Mak-mak, Housemate, Traveller"
+        example: "cth., Usahawan baru, Pelajar, Ibu bekerja, Freelancer"
       },
       {
-        name: "Link Affiliate",
-        description: "Link affiliate Shopee anda",
+        name: "Nada & Gaya",
+        description: "Gaya penulisan yang anda nak (borak, santai, yakin, sarkastik)",
+        example: "cth., Borak mamak, Santai, Yakin, Sarkastik"
+      },
+      {
+        name: "Link Pembelian",
+        description: "Link untuk pembelian produk anda",
+        example: "cth., https://websiteanda.com/beli"
+      }
+    ],
+    template: `Tulis thread Instagram gaya borak mamak untuk promosikan produk sendiri (bukan affiliate/Shopee). Fokus pada keunikan dan kelebihan produk, sesuai untuk jualan direct.\n\nNama Produk: [namaproduk]\nJenis Produk: [jenisproduk]\nKelebihan Produk: [kelebihanproduk]\nHarga: [harga]\nAudience Sasaran: [audiencesasaran]\nNada & Gaya: [nada&gaya]\nLink Pembelian: [linkpembelian]\n\nPanduan:\n- Mulakan dengan hook yang lucu, relatable atau menyindir manja\n- Ceritakan masalah yang biasa dihadapi audience dan kaitkan dengan produk\n- Highlight kelebihan utama produk dengan gaya [nada&gaya]\n- Nyatakan harga dan kenapa berbaloi\n- Akhiri dengan CTA santai dan letakkan link pembelian\n\nTulis 4–6 post pendek bergaya Threads (1–3 ayat per post), guna emoji dan gaya santai Malaysia.\n\nAkhir sekali, letakkan:\n👉 [linkpembelian]`
+  },
+  {
+    id: "shopee-thread-ig",
+    title: "🧵 Penulis Thread IG Shopee (2 Info Sahaja)",
+    description: "Cipta thread Instagram Shopee hanya dengan info produk dan link komisen.",
+    fields: [
+      {
+        name: "Info Produk",
+        description: "Salin info produk dari Shopee (boleh copy paste terus)",
+        example: "cth., Mesin Basuh Mini Portable, Cuci baju tanpa mesin besar, Jimat ruang, Harga RM59 – RM89"
+      },
+      {
+        name: "Link Komisen",
+        description: "Link komisen Shopee anda",
         example: "cth., https://shope.ee/xxxxxxx"
       }
     ],
-    template: `Anda adalah penulis content yang kelakar dan pandai sindir manja, tugas anda adalah hasilkan thread Instagram gaya "borak mamak" yang boleh tarik perhatian dan buat orang nak beli.\n\nProduk: [namaproduk]\nFungsi: [fungsiproduk]\nKenapa Best: [kenapabest]\nHarga: [harga]\nNada & Gaya: [nada&gaya]\nAudience Sasaran: [audiencesasaran]\nLink Affiliate: [linkaffiliate]\n\nPanduan:\n- Mulakan dengan hook yang lucu atau relatable (boleh sindir sikit audience)\n- Sambung dengan cerita atau situasi harian yang buat orang terasa\n- Kaitkan fungsi & kelebihan produk dengan gaya [nada&gaya] sesuai untuk [audiencesasaran]\n- Letak harga dan sebab kenapa wajib grab\n- Akhiri dengan CTA santai: "📌 Link Shopee kat bawah ni,"\n\nTulis 4–6 post pendek bergaya Threads (1–3 ayat per post), guna emoji dan gaya casual Malaysia.\n\nAkhir sekali, selitkan:\n [linkaffiliate]`
+    template: `Tulis thread Instagram gaya borak mamak untuk promosikan produk Shopee ini. Guna info produk dan link komisen di bawah.\n\nInfo Produk: [infoproduk]\nLink Komisen: [linkkomisen]\n\nPanduan:\n- Mulakan dengan ayat hook yang lucu atau relatable\n- Ceritakan kelebihan atau fungsi utama produk\n- Selitkan sebab kenapa orang patut beli\n- Akhiri dengan CTA santai dan letakkan link komisen\n\nTulis 3–5 post pendek bergaya Threads (1–2 ayat per post), guna emoji dan gaya santai Malaysia.\n\nAkhir sekali, letakkan:\n👉 [linkkomisen]`
   }
 ];
 

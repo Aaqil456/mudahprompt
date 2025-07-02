@@ -3,6 +3,67 @@
 
 const presetAssistants = [
   {
+    id: "selling-thread-ig",
+    title: "🧵 Penulis Thread Instagram Jualan Produk Sendiri",
+    description: "Cipta thread Instagram gaya borak mamak untuk jual produk sendiri (digital/fizikal, ebook, kursus, dll.) secara direct.",
+    fields: [
+      {
+        name: "Nama Produk",
+        description: "Nama produk yang anda nak jual",
+        example: "cth., Ebook Rahsia Bisnes, Kursus Canva, Baju Muslimah, Software Kewangan"
+      },
+      {
+        name: "Jenis Produk",
+        description: "Jenis produk (Digital/Fizikal)",
+        example: "cth., Digital, Fizikal"
+      },
+      {
+        name: "Kelebihan Produk",
+        description: "3 sebab utama kenapa produk ini best",
+        example: "cth., Mudah digunakan, Harga berbaloi, Support sepanjang tahun"
+      },
+      {
+        name: "Harga",
+        description: "Harga produk",
+        example: "cth., RM49, RM199, RM99/bulan"
+      },
+      {
+        name: "Audience Sasaran",
+        description: "Siapa yang sesuai beli produk ni",
+        example: "cth., Usahawan baru, Pelajar, Ibu bekerja, Freelancer"
+      },
+      {
+        name: "Nada & Gaya",
+        description: "Gaya penulisan yang anda nak (borak, santai, yakin, sarkastik)",
+        example: "cth., Borak mamak, Santai, Yakin, Sarkastik"
+      },
+      {
+        name: "Link Pembelian",
+        description: "Link untuk pembelian produk anda",
+        example: "cth., https://websiteanda.com/beli"
+      }
+    ],
+    template: `Tulis thread Instagram gaya borak mamak untuk promosikan produk sendiri (bukan affiliate/Shopee). Fokus pada keunikan dan kelebihan produk, sesuai untuk jualan direct.\n\nNama Produk: [namaproduk]\nJenis Produk: [jenisproduk]\nKelebihan Produk: [kelebihanproduk]\nHarga: [harga]\nAudience Sasaran: [audiencesasaran]\nNada & Gaya: [nada&gaya]\nLink Pembelian: [linkpembelian]\n\nPanduan:\n- Mulakan dengan hook yang lucu, relatable atau menyindir manja\n- Ceritakan masalah yang biasa dihadapi audience dan kaitkan dengan produk\n- Highlight kelebihan utama produk dengan gaya [nada&gaya]\n- Nyatakan harga dan kenapa berbaloi\n- Akhiri dengan CTA santai dan letakkan link pembelian\n\nTulis 4–6 post pendek bergaya Threads (1–3 ayat per post), guna emoji dan gaya santai Malaysia.\n\nAkhir sekali, letakkan:\n👉 [linkpembelian]`
+  },
+  {
+    id: "shopee-thread-ig",
+    title: "🧵 Penulis Thread IG Shopee (2 Info Sahaja)",
+    description: "Cipta thread Instagram Shopee hanya dengan info produk dan link komisen.",
+    fields: [
+      {
+        name: "Info Produk",
+        description: "Salin info produk dari Shopee (boleh copy paste terus)",
+        example: "cth., Mesin Basuh Mini Portable, Cuci baju tanpa mesin besar, Jimat ruang, Harga RM59 – RM89"
+      },
+      {
+        name: "Link Komisen",
+        description: "Link komisen Shopee anda",
+        example: "cth., https://shope.ee/xxxxxxx"
+      }
+    ],
+    template: `Tulis thread Instagram gaya borak mamak untuk promosikan produk Shopee ini. Guna info produk dan link komisen di bawah.\n\nInfo Produk: [infoproduk]\nLink Komisen: [linkkomisen]\n\nPanduan:\n- Mulakan dengan ayat hook yang lucu atau relatable\n- Ceritakan kelebihan atau fungsi utama produk\n- Selitkan sebab kenapa orang patut beli\n- Akhiri dengan CTA santai dan letakkan link komisen\n\nTulis 3–5 post pendek bergaya Threads (1–2 ayat per post), guna emoji dan gaya santai Malaysia.\n\nAkhir sekali, letakkan:\n👉 [linkkomisen]`
+  },
+  {
     id: "whatsapp-reply",
     title: "💬 Pembalas WhatsApp Panjang",
     description: "Auto generate reply bila orang marah / bertanya / nak refund / puji kita.",
