@@ -61,7 +61,7 @@ const presetAssistants = [
         example: "cth., https://shope.ee/xxxxxxx"
       }
     ],
-    template: `Tulis thread Instagram gaya borak mamak untuk promosikan produk Shopee ini. Guna info produk dan link komisen di bawah.\n\nInfo Produk: [infoproduk]\nLink Komisen: [linkkomisen]\n\nPanduan:\n- Mulakan dengan ayat hook yang lucu atau relatable\n- Ceritakan kelebihan atau fungsi utama produk\n- Selitkan sebab kenapa orang patut beli\n- Akhiri dengan CTA santai dan letakkan link komisen\n\nTulis 3–5 post pendek bergaya Threads (1–2 ayat per post), guna emoji dan gaya santai Malaysia.\n\nAkhir sekali, letakkan:\n👉 [linkkomisen]`
+    template: `Tulis thread Instagram gaya penceritaan santai dan hormat untuk promosikan produk Shopee ini. Elakkan gaya terlalu kolokial atau mamak, tapi kekalkan nada mesra dan mudah difahami.\n\nInfo Produk: [infoproduk]\nLink Komisen: [linkkomisen]\n\nPanduan:\n- Mulakan dengan ayat pembuka yang menarik dan relatable\n- Ceritakan kisah atau situasi yang menggambarkan keperluan atau kelebihan produk\n- Tekankan manfaat utama produk dengan cara yang jujur dan meyakinkan\n- Akhiri dengan ajakan sopan untuk mencuba dan letakkan link komisen\n\nTulis 3–5 post pendek bergaya Threads (1–2 ayat per post), guna emoji dan bahasa santai yang sopan.\n\nAkhir sekali, letakkan:\n👉 [linkkomisen]`
   },
   {
     id: "whatsapp-reply",
