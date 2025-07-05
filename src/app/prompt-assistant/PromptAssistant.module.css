@@ -516,6 +516,22 @@
     width: 100%;
     box-sizing: border-box;
   }
+  .inputFields {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .label, .textarea {
+    width: 100%;
+  }
   .promptsGrid {
     grid-template-columns: 1fr;
     gap: 1rem;

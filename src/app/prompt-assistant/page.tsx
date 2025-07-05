@@ -482,6 +482,15 @@ export default function PromptAssistant() {
 
       setGeneratedPrompt(prompt);
       setIsEditing(false);
+      // Save prompt history
+      fetch('/api/save-prompt-history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          assistantId: selectedAssistant.id,
+          prompt: prompt,
+        }),
+      });
     }
   };
 
