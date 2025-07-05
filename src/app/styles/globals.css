@@ -125,4 +125,11 @@ main {
 }
 .animate-grid-fade {
   animation: gridFade 8s linear infinite alternate;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw;
+  }
 } 

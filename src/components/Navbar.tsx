@@ -123,6 +123,14 @@ export default function Navbar() {
             </button>
             
             <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+              <button
+                className={styles.closeButton}
+                onClick={toggleMobileMenu}
+                aria-label="Tutup menu"
+                style={{ position: 'absolute', top: 20, right: 20, background: 'none', border: 'none', color: '#fff', fontSize: '2rem', zIndex: 1001 }}
+              >
+                &times;
+              </button>
               {filteredNavItems.map((item) => {
                 if (!item) return null;
                 return (
