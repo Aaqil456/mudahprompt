@@ -14,12 +14,6 @@ export default function Footer() {
           </Link>
         </div>
         <div className={styles.navbarMenu}>
-          <Link href="/privacy-policy" className={styles.navbarLink}>
-            Privacy Policy
-          </Link>
-          <Link href="/terms" className={styles.navbarLink}>
-            Terms & Conditions
-          </Link>
           <Link href="/contact" className={styles.navbarLink}>
             Hubungi Kami
           </Link>

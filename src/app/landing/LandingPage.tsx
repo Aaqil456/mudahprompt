@@ -208,6 +208,7 @@ export default function LandingPage() {
   };
 
   return (
+    <>
     <div className={styles.container}>
       {/* Grid background */}
       <div className={styles.landingBg} />
@@ -419,5 +420,10 @@ export default function LandingPage() {
         </section>
       </main>
     </div>
+      <div style={{ textAlign: 'center', marginTop: '2rem', marginBottom: '1.5rem', fontSize: '0.95rem', color: '#aaa' }}>
+        <Link href="/privacy-policy" style={{ marginRight: '1.5rem', color: '#aaa', textDecoration: 'underline' }}>Privacy Policy</Link>
+        <Link href="/terms" style={{ color: '#aaa', textDecoration: 'underline' }}>Terms & Conditions</Link>
+      </div>
+    </>
   )
 } 

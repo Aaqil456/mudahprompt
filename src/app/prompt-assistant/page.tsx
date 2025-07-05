@@ -571,17 +571,17 @@ export default function PromptAssistant() {
     setGeneratedPrompt("");
     setGeminiAnswer("");
     // Auto-scroll to fields container on both mobile and desktop after a short delay
-    setTimeout(() => {
-      const element = fieldsContainerRef.current;
-      if (element) {
-        const navbarHeight = 80; // Approximate navbar height
-        const elementPosition = element.offsetTop - navbarHeight - 20; // 20px extra padding
-        window.scrollTo({
-          top: elementPosition,
-          behavior: 'smooth'
-        });
-      }
-    }, 150); // Slightly longer delay to ensure DOM is updated
+      setTimeout(() => {
+        const element = fieldsContainerRef.current;
+        if (element) {
+          const navbarHeight = 80; // Approximate navbar height
+          const elementPosition = element.offsetTop - navbarHeight - 20; // 20px extra padding
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 150); // Slightly longer delay to ensure DOM is updated
   };
 
   const handleFieldChange = (field: string, value: string) => {

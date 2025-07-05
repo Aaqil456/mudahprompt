@@ -19,6 +19,14 @@ const navItems: NavItem[] = [
   { href: '/login', label: 'Log Masuk' }
 ]
 
+// SVG icon for user profile
+const UserIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00ffae" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '0.5rem', verticalAlign: 'middle' }}>
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 20c0-2.5 3.5-4 8-4s8 1.5 8 4" />
+  </svg>
+);
+
 export default function Navbar() {
   const pathname = usePathname()
   const router = useRouter()
@@ -26,12 +34,20 @@ export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [userName, setUserName] = useState<string | null>(null)
 
   useEffect(() => {
     const checkAuth = async () => {
       const supabase = createClient()
       const { data: { session } } = await supabase.auth.getSession()
       setIsAuthenticated(!!session)
+      if (session?.user) {
+        // Try to get username from user_metadata, fallback to email
+        const name = session.user.user_metadata?.username || session.user.user_metadata?.full_name || session.user.email;
+        setUserName(name);
+      } else {
+        setUserName(null);
+      }
       setIsLoading(false)
     }
     checkAuth()
@@ -103,12 +119,12 @@ export default function Navbar() {
       padding: '1rem 0'
     }}>
       <div className={styles.navbarInner}>
-        <div className={styles.navbarBrand}>
-          <Link href="/" className={styles.navbarLink}>
-            <span className="text-primary">Mudah</span>
-            <span className="text-white">Prompt</span>
-          </Link>
-        </div>
+        {(userName) ? (
+          <div className={styles.profileGreeting} style={{ color: '#00ffae', fontFamily: 'var(--font-digital)', fontSize: '1.1rem', display: 'flex', alignItems: 'center', marginLeft: '0.5rem' }}>
+            <UserIcon />
+            <b>{userName}</b>
+          </div>
+        ) : null}
         
         {isMobile ? (
           <>
@@ -147,7 +163,7 @@ export default function Navbar() {
             </div>
           </>
         ) : (
-          <div className={styles.navbarMenu}>
+          <div className={styles.navbarMenu} style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
             {filteredNavItems.map((item) => {
               if (!item) return null;
               return (
