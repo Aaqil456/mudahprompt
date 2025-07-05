@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mudah Prompt",
-  description: "bantu anda cipta prompt AI yang berkesan dengan templat yang tersusun. Tak perlu lagi bergelut dengan AI yang tak faham apa yang anda mahu!",
+  description: "bantu anda cipta prompt AI yang berkesan dengan template yang tersusun. Tak perlu lagi bergelut dengan AI yang tak faham apa yang anda mahu!",
   icons: {
     icon: '/mudahprompt.webp',
     shortcut: '/mudahprompt.webp',
