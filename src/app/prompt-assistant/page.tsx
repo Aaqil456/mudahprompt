@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import styles from "./PromptAssistant.module.css";
 import CustomPromptList from "./components/CustomPromptList";
+import { assistantInstructions } from '@/lib/prompt-assistant/assistantInstructions';
 
 // Queue system for handling AI requests
 class RequestQueue {
@@ -453,6 +454,10 @@ export default function PromptAssistant() {
   const fieldsContainerRef = useRef<HTMLDivElement>(null);
   const supabase = createClient();
   const [geminiAnswer, setGeminiAnswer] = useState("");
+  const [customInstruction, setCustomInstruction] = useState('');
+  const [isLoadingInstruction, setIsLoadingInstruction] = useState(false);
+  const [isEditingInstruction, setIsEditingInstruction] = useState(false);
+  const [instructionSaved, setInstructionSaved] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -464,6 +469,22 @@ export default function PromptAssistant() {
     
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (!selectedAssistant) return;
+    setIsLoadingInstruction(true);
+    setInstructionSaved(false);
+    fetch(`/api/assistant-instructions?assistantId=${selectedAssistant.id}`)
+      .then(res => res.json())
+      .then(data => {
+        setCustomInstruction(
+          data.instruction ||
+          (selectedAssistant && assistantInstructions[selectedAssistant.id]) ||
+          'Answer the following prompt directly and completely. Use the same language as the prompt. Return your answer as a single, clear response.'
+        );
+      })
+      .finally(() => setIsLoadingInstruction(false));
+  }, [selectedAssistant]);
 
   const handleGeneratePrompt = () => {
     if (selectedAssistant && Object.keys(fieldValues).length > 0) {
@@ -523,7 +544,7 @@ export default function PromptAssistant() {
           body: JSON.stringify({ 
             promptText: promptToSend, 
             assistantId: selectedAssistant.id,
-            systemInstruction: "Answer the following prompt directly and completely. Use the same language as the prompt. Return your answer as a single, clear response."
+            systemInstruction: customInstruction || "Answer the following prompt directly and completely. Use the same language as the prompt. Return your answer as a single, clear response."
           }),
         });
 
@@ -548,6 +569,7 @@ export default function PromptAssistant() {
     setSelectedAssistant(assistant);
     setFieldValues({});
     setGeneratedPrompt("");
+    setGeminiAnswer("");
     // Auto-scroll to fields container on both mobile and desktop after a short delay
     setTimeout(() => {
       const element = fieldsContainerRef.current;
@@ -567,6 +589,24 @@ export default function PromptAssistant() {
       ...prev,
       [field]: value
     }));
+  };
+
+  const handleEditInstruction = () => {
+    setIsEditingInstruction(true);
+    setInstructionSaved(false);
+  };
+
+  const handleSaveInstruction = async () => {
+    if (!selectedAssistant) return;
+    setIsLoadingInstruction(true);
+    await fetch('/api/assistant-instructions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ assistantId: selectedAssistant.id, instruction: customInstruction }),
+    });
+    setIsEditingInstruction(false);
+    setIsLoadingInstruction(false);
+    setInstructionSaved(true);
   };
 
   return (
@@ -654,13 +694,6 @@ export default function PromptAssistant() {
                     >
                       Copy
                     </button>
-                    <button
-                      className={styles.actionButton}
-                      onClick={handleGeminiAssist}
-                      disabled={isAssistingWithGemini}
-                    >
-                      {isAssistingWithGemini ? 'Asking...' : 'Ask Gemini'}
-                    </button>
                   </div>
                 </div>
                 <textarea
@@ -669,9 +702,48 @@ export default function PromptAssistant() {
                   onChange={(e) => setEditedPrompt(e.target.value)}
                   readOnly={!isEditing}
                 />
+                <div className={styles.customInstructionArea}>
+                  <label className={styles.label}><strong>Arahan Pembantu</strong></label>
+                  <p className={styles.fieldDescription}>
+                    Anda boleh ubah arahan ini untuk mempengaruhi cara AI menjawab. Arahan yang disimpan akan digunakan secara automatik untuk pembantu ini.
+                  </p>
+                  {isLoadingInstruction ? (
+                    <p>Memuatkan arahan...</p>
+                  ) : (
+                    <>
+                      <textarea
+                        className={styles.textarea}
+                        value={customInstruction}
+                        onChange={e => setCustomInstruction(e.target.value)}
+                        readOnly={!isEditingInstruction}
+                        placeholder="Masukkan arahan khas untuk pembantu ini..."
+                        rows={3}
+                      />
+                      <div className={styles.outputActions}>
+                        {!isEditingInstruction ? (
+                          <button className={styles.actionButton} onClick={handleEditInstruction}>
+                            Edit Arahan
+                          </button>
+                        ) : (
+                          <button className={styles.actionButton} onClick={handleSaveInstruction} disabled={isLoadingInstruction}>
+                            Simpan Arahan
+                          </button>
+                        )}
+                        {instructionSaved && <span className={styles.savedMessage}>Disimpan!</span>}
+                        <button
+                          className={styles.actionButton}
+                          onClick={handleGeminiAssist}
+                          disabled={isAssistingWithGemini}
+                        >
+                          {isAssistingWithGemini ? 'Menanya...' : 'Dapatkan Jawapan'}
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
                 {geminiAnswer && (
                   <div className={styles.geminiAnswerArea}>
-                    <h3 className={styles.outputTitle}>Gemini Answer</h3>
+                    <h3 className={styles.outputTitle}>Jawapan AI</h3>
                     <textarea
                       className={styles.outputTextarea}
                       value={geminiAnswer}
