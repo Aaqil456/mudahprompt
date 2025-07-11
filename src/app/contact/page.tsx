@@ -1,161 +1,97 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import styles from './contact.module.css'
 
-export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
+interface ChatMessage {
+  role: 'user' | 'bot'
+  content: string
+}
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+export default function ContactPage() {
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    { role: 'bot', content: 'Hai! Saya Chatbot MudahPrompt. Ada apa-apa soalan tentang web app ini? Tulis di bawah.' }
+  ])
+  const [input, setInput] = useState('')
+  const [loading, setLoading] = useState(false)
+  const chatEndRef = useRef<HTMLDivElement>(null)
+
+  const sendMessage = async () => {
+    if (!input.trim()) return
+    const userMsg: ChatMessage = { role: 'user', content: input }
+    setMessages(prev => [...prev, userMsg])
+    setInput('')
+    setLoading(true)
+    try {
+      const res = await fetch('/api/chatbot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: input,
+          history: messages.filter(m => m.role !== 'bot').map(m => m.content)
+        })
+      })
+      const data = await res.json()
+      setMessages(prev => [...prev, { role: 'bot', content: data.reply || 'Maaf, saya tidak dapat menjawab soalan itu.' }])
+    } catch (e) {
+      setMessages(prev => [...prev, { role: 'bot', content: 'Ralat berlaku. Sila cuba lagi.' }])
+    }
+    setLoading(false)
+    setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    // Create mailto link with form data
-    const mailtoLink = `mailto:aautomate123@gmail.com?subject=MudahPrompt Contact - ${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`
-Nama: ${formData.name}
-Email: ${formData.email}
-Subjek: ${formData.subject}
-
-Mesej:
-${formData.message}
-
----
-Mesej ini dihantar dari MudahPrompt Contact Form
-Tarikh: ${new Date().toLocaleString('ms-MY', { timeZone: 'Asia/Kuala_Lumpur' })}
-    `)}`
-    
-    // Open user's email client
-    window.open(mailtoLink)
-    
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' })
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !loading) sendMessage()
   }
 
   return (
     <div className={styles.container}>
-      <div className={styles.landingBg}></div>
-      <div className={styles.content}>
-        <div className={styles.card}>
-          <h1 className={styles.title}>Hubungi Kami</h1>
-          <p className={styles.subtitle}>
-            Ada soalan atau cadangan? Kami sedia membantu anda!
-          </p>
-          
-          <div className={styles.contactInfo}>
-            <div className={styles.infoItem}>
-              <div className={styles.infoIcon}>📧</div>
-              <div>
-                <h3>Email</h3>
-                <p>aautomate123@gmail.com</p>
-              </div>
-            </div>
-            <div className={styles.infoItem}>
-              <div className={styles.infoIcon}>⏰</div>
-              <div>
-                <h3>Masa Respons</h3>
-                <p>24-48 jam pada hari bekerja</p>
-              </div>
+      <div className={styles.promptBg} />
+      <div className={styles.contactCard}>
+        <h1 className={styles.contactTitle}>Hubungi Kami</h1>
+        <p className={styles.contactSubtitle}>
+          Ada soalan atau cadangan? Tanya chatbot kami di bawah!
+        </p>
+        <div className={styles.contactInfo}>
+          <div className={styles.infoItem}>
+            <div className={styles.infoIcon}>📧</div>
+            <div>
+              <h3>Email</h3>
+              <p>aautomate123@gmail.com</p>
             </div>
           </div>
-
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formGroup}>
-              <label htmlFor="name">Nama Penuh *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-                placeholder="Masukkan nama penuh anda"
-                className={styles.input}
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="email">Email *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                placeholder="Masukkan email anda"
-                className={styles.input}
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="subject">Subjek *</label>
-              <select
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleInputChange}
-                required
-                className={styles.select}
-              >
-                <option value="">Pilih subjek</option>
-                <option value="General Inquiry">Soalan Umum</option>
-                <option value="Technical Support">Sokongan Teknikal</option>
-                <option value="Feature Request">Cadangan Ciri</option>
-                <option value="Bug Report">Laporan Bug</option>
-                <option value="Partnership">Perkongsian</option>
-                <option value="Other">Lain-lain</option>
-              </select>
-            </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="message">Mesej *</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                required
-                placeholder="Tulis mesej anda di sini..."
-                rows={6}
-                className={styles.textarea}
-              />
-            </div>
-
-            <button 
-              type="submit" 
-              className={styles.submitButton}
+        </div>
+        <div className={styles.contactChatWindow}>
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={
+                styles.contactChatBubble + ' ' + (msg.role === 'user' ? styles.contactChatBubbleUser : styles.contactChatBubbleBot)
+              }
             >
-              Hantar Mesej
-            </button>
-          </form>
-
-          <div className={styles.faqSection}>
-            <h2>Soalan Lazim</h2>
-            <div className={styles.faqItem}>
-              <h3>Berapa lama masa untuk dapat respons?</h3>
-              <p>Kami biasanya membalas dalam masa 24-48 jam pada hari bekerja.</p>
+              {msg.content}
             </div>
-            <div className={styles.faqItem}>
-              <h3>Adakah MudahPrompt percuma?</h3>
-              <p>Ya, MudahPrompt adalah percuma untuk digunakan. Kami disokong oleh iklan untuk mengekalkan perkhidmatan.</p>
-            </div>
-            <div className={styles.faqItem}>
-              <h3>Boleh saya cadang ciri baru?</h3>
-              <p>Ya! Kami sentiasa terbuka untuk cadangan. Pilih "Cadangan Ciri" dalam borang di atas.</p>
-            </div>
-          </div>
+          ))}
+          <div ref={chatEndRef} />
+        </div>
+        <div className={styles.contactChatInputBar}>
+          <input
+            type="text"
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={handleInputKeyDown}
+            placeholder="Tulis soalan anda..."
+            className={styles.contactChatInput}
+            disabled={loading}
+            autoFocus
+          />
+          <button
+            onClick={sendMessage}
+            className={styles.contactChatSendButton}
+            disabled={loading || !input.trim()}
+          >
+            {loading ? '...' : 'Hantar'}
+          </button>
         </div>
       </div>
     </div>

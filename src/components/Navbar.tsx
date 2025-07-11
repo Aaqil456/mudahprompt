@@ -123,7 +123,7 @@ export default function Navbar() {
           <div className={styles.profileGreeting} style={{ color: '#00ffae', fontFamily: 'var(--font-digital)', fontSize: '1.1rem', display: 'flex', alignItems: 'center', marginLeft: '0.5rem' }}>
             <UserIcon />
             <b>{userName}</b>
-          </div>
+        </div>
         ) : null}
         
         {isMobile ? (
