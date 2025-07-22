@@ -51,16 +51,16 @@ export default function ContactPage() {
         <h1 className={styles.contactTitle}>Hubungi Kami</h1>
         <p className={styles.contactSubtitle}>
           Ada soalan atau cadangan? Tanya chatbot kami di bawah!
-        </p>
-        <div className={styles.contactInfo}>
-          <div className={styles.infoItem}>
-            <div className={styles.infoIcon}>📧</div>
-            <div>
-              <h3>Email</h3>
-              <p>aautomate123@gmail.com</p>
+          </p>
+          <div className={styles.contactInfo}>
+            <div className={styles.infoItem}>
+              <div className={styles.infoIcon}>📧</div>
+              <div>
+                <h3>Email</h3>
+                <p>aautomate123@gmail.com</p>
+              </div>
             </div>
-          </div>
-        </div>
+              </div>
         <div className={styles.contactChatWindow}>
           {messages.map((msg, i) => (
             <div
@@ -73,10 +73,10 @@ export default function ContactPage() {
             </div>
           ))}
           <div ref={chatEndRef} />
-        </div>
+          </div>
         <div className={styles.contactChatInputBar}>
-          <input
-            type="text"
+              <input
+                type="text"
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={handleInputKeyDown}
@@ -85,13 +85,13 @@ export default function ContactPage() {
             disabled={loading}
             autoFocus
           />
-          <button
+            <button 
             onClick={sendMessage}
             className={styles.contactChatSendButton}
             disabled={loading || !input.trim()}
-          >
+            >
             {loading ? '...' : 'Hantar'}
-          </button>
+            </button>
         </div>
       </div>
     </div>
