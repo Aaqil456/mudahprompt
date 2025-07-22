@@ -655,7 +655,7 @@ export default function PromptAssistant() {
                     className={styles.textarea}
                     value={fieldValues[field.name] || ''}
                     onChange={(e) => handleFieldChange(field.name, e.target.value)}
-                    placeholder={`Enter ${field.name}...`}
+                    placeholder={`isikan ${field.name}...`}
                   />
                 </div>
               ))}
