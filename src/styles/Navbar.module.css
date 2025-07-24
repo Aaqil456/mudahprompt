@@ -6,10 +6,10 @@
   justify-content: center;
   align-items: center;
   padding: 1.2rem 0;
-  background: linear-gradient(90deg, rgba(24,28,34,0.92) 60%, rgba(6, 182, 212, 0.04) 100%);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(16px);
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.06);
+  backdrop-filter: none;
   border-radius: 0 0 1.2rem 1.2rem;
   transition: background 0.3s, box-shadow 0.3s;
 }
@@ -25,9 +25,9 @@
 }
 
 .navbarBrand {
-  font-family: var(--font-digital);
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 1.5rem;
-  color: var(--primary-color);
+  color: #2563eb;
   letter-spacing: 0.18em;
   font-weight: bold;
   user-select: none;
@@ -44,8 +44,8 @@
 }
 
 .navbarLink {
-  color: var(--text-primary);
-  font-family: var(--font-digital);
+  color: #111827;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -60,15 +60,15 @@
 }
 
 .navbarLink:hover, .navbarLink.active {
-  color: var(--primary-color);
-  border-bottom: 2px solid var(--primary-color);
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
 }
 
 .navbarDivider {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: #2563eb;
   opacity: 0.5;
   display: inline-block;
   margin: 0 0.5rem;
@@ -95,7 +95,7 @@
   transition: all 0.3s linear;
   position: relative;
   transform-origin: 1px;
-  background: var(--text-primary);
+  background: #111827;
 }
 
 .hamburgerLine.open:nth-child(1) {
@@ -121,8 +121,8 @@
   height: 100vh;
   margin: 0;
   border-radius: 0;
-  background: #000 !important;
-  backdrop-filter: blur(16px);
+  background: #fff !important;
+  backdrop-filter: none;
   z-index: 999;
   flex-direction: column;
   justify-content: flex-start;
@@ -132,7 +132,7 @@
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   padding-top: 90px;
-  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.08);
   overflow-y: auto;
   max-height: 100vh;
   padding-bottom: max(1rem, env(safe-area-inset-bottom));
@@ -144,8 +144,8 @@
 }
 
 .mobileNavLink {
-  color: var(--text-primary);
-  font-family: var(--font-digital);
+  color: #111827;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 1.5rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -154,14 +154,14 @@
   border: 2px solid transparent;
   border-radius: 0.7rem;
   transition: all 0.2s ease;
-  background: rgba(6, 182, 212, 0.1);
+  background: #e0e7ff;
 }
 
 .mobileNavLink:hover, .mobileNavLink.active {
-  color: var(--primary-color);
-  border-color: var(--primary-color);
-  background: rgba(6, 182, 212, 0.2);
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  color: #2563eb;
+  border-color: #2563eb;
+  background: #c7d2fe;
+  box-shadow: 0 0 12px rgba(37,99,235,0.10);
 }
 
 @media (max-width: 768px) {
@@ -205,12 +205,12 @@
   bottom: 0;
   width: 100vw;
   z-index: 10;
-  background: linear-gradient(90deg, rgba(24,28,34,0.92) 60%, rgba(6, 182, 212, 0.04) 100%);
-  border-top: 2px solid var(--neon-green);
+  background: #fff;
+  border-top: 2px solid #2563eb;
   border-bottom: none;
   border-radius: 0;
-  box-shadow: 0 -4px 32px 0 rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(16px);
+  box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.06);
+  backdrop-filter: none;
   padding: 1rem 0 max(1rem, env(safe-area-inset-bottom));
   display: flex;
   justify-content: center;

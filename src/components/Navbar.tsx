@@ -21,7 +21,7 @@ const navItems: NavItem[] = [
 
 // SVG icon for user profile
 const UserIcon = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00ffae" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '0.5rem', verticalAlign: 'middle' }}>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '0.5rem', verticalAlign: 'middle' }}>
     <circle cx="12" cy="8" r="4" />
     <path d="M4 20c0-2.5 3.5-4 8-4s8 1.5 8 4" />
   </svg>
@@ -120,7 +120,7 @@ export default function Navbar() {
     }}>
       <div className={styles.navbarInner}>
         {(userName) ? (
-          <div className={styles.profileGreeting} style={{ color: '#00ffae', fontFamily: 'var(--font-digital)', fontSize: '1.1rem', display: 'flex', alignItems: 'center', marginLeft: '0.5rem' }}>
+          <div className={styles.profileGreeting} style={{ color: '#2563eb', fontFamily: 'Inter, Arial, sans-serif', fontSize: '1.1rem', display: 'flex', alignItems: 'center', marginLeft: '0.5rem' }}>
             <UserIcon />
             <b>{userName}</b>
         </div>

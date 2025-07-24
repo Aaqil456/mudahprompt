@@ -2,13 +2,11 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: var(--grid-bg);
+  background: #f9fafb;
   min-height: 100vh;
   width: 100vw;
   pointer-events: none;
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 23px, var(--grid-dot) 24px),
-    repeating-linear-gradient(90deg, transparent, transparent 23px, var(--grid-dot) 24px);
+  background-image:none;
 }
 
 .loginContainer {
@@ -22,10 +20,10 @@
 }
 
 .loginCard {
-  background: rgba(24,28,34,0.85);
+  background: rgb(255, 255, 255);
   border: 1px solid var(--primary-color);
   border-radius: 1.2rem;
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 20px #2563eb;
   padding: 2.5rem 2rem 2rem 2rem;
   max-width: 400px;
   width: 100%;
@@ -41,19 +39,15 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(45deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+  background: none;
   animation: shine 3s infinite;
 }
 
-@keyframes shine {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
 
 .loginTitle {
   font-family: var(--font-digital);
   font-size: 2.2rem;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+  background: linear-gradient(90deg, #2563eb, #4e80ec);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -64,7 +58,7 @@
 }
 
 .loginDesc {
-  color: var(--text-secondary);
+  color: #181c22;
   font-size: 1.1rem;
   margin-bottom: 2rem;
   text-align: center;
@@ -73,7 +67,7 @@
 
 .neonButton {
   font-family: var(--font-digital);
-  color: var(--primary-color);
+  color: #2563eb;
   border: 1px solid var(--primary-color);
   background: transparent;
   padding: 0.7rem 2.5rem;
@@ -82,7 +76,7 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 10px #2563eb;
   transition: all 0.3s ease;
   position: relative;
   margin-bottom: 0.5rem;
@@ -99,16 +93,16 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(6, 182, 212, 0.2),
+    #2563eb,
     transparent
   );
   transition: 0.5s;
 }
 
 .neonButton:hover {
-  background: var(--primary-color);
+  background: #2563eb;
   color: #181c22;
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+  
   transform: translateY(-2px);
 }
 
