@@ -237,7 +237,7 @@ export default function LandingPage() {
             {/* YouTube Video */}
             <iframe
               className={styles.robotImg}
-              src="https://www.youtube.com/embed/aAVeOwPbqYw"
+              src="https://www.youtube.com/watch?v=uwxqppXfj7o"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
