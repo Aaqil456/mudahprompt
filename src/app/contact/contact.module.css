@@ -315,7 +315,7 @@
 
 .contactChatSendButton {
   font-family: var(--font-digital);
-  color: var(--text-primary);
+  color: #ffffff;
   border: 1px solid var(--border-color);
   background: var(--primary-color);
   padding: 0.7rem 2rem;

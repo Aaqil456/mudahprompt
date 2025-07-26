@@ -414,16 +414,16 @@ export default function LandingPage() {
             </div>
             
             <p className={styles.finalCTANote}>
-              Tiada kad kredit diperlukan • Daftar dalam 30 saat • Mulakan dengan templat percuma
+              Tiada kad kredit diperlukan • Daftar dalam 30 saat • Mulakan dengan template percuma
             </p>
         </div>
         </section>
       </main>
     </div>
-      <div style={{ textAlign: 'center', marginTop: '2rem', marginBottom: '1.5rem', fontSize: '0.95rem', color: '#aaa' }}>
-        <Link href="/privacy-policy" style={{ marginRight: '1.5rem', color: '#aaa', textDecoration: 'underline' }}>Privacy Policy</Link>
-        <Link href="/terms" style={{ marginRight: '1.5rem',color: '#aaa', textDecoration: 'underline' }}>Terms & Conditions</Link>
-        <Link href="/contact" style={{ color: '#aaa', textDecoration: 'underline' }}>Hubungi Kami</Link>
+      <div style={{ textAlign: 'center', marginTop: '2rem', marginBottom: '1.5rem', fontSize: '0.95rem', color: '#000000' }}>
+        <Link href="/privacy-policy" style={{ marginRight: '1.5rem', color: '#000000', textDecoration: 'underline' }}>Privacy Policy</Link>
+        <Link href="/terms" style={{ marginRight: '1.5rem',color: '#000000', textDecoration: 'underline' }}>Terms & Conditions</Link>
+        <Link href="/contact" style={{ color: '#000000', textDecoration: 'underline' }}>Hubungi Kami</Link>
       </div>
     </>
   )

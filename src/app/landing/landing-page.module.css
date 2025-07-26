@@ -1019,9 +1019,9 @@
 }
 
 .finalCTANote {
-  color: #6b7280;
+  color: #000000;
   font-size: 0.9rem;
-  opacity: 0.8;
+  opacity: 1.0;
 }
 
 /* Assistants Preview */

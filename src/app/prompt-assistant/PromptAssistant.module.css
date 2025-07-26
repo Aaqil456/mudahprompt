@@ -185,7 +185,7 @@
 
 .button {
   font-family: var(--font-digital);
-  color: var(--text-primary);
+  color: #ffffff;
   border: 1px solid var(--border-color);
   background: #2563eb;
   padding: 0.7rem 2.5rem;
@@ -232,7 +232,7 @@
 
 .actionButton {
   font-family: var(--font-digital);
-  color: var(--text-primary);
+  color: #ffffff;
   border: 1px solid var(--border-color);
   background: #2563eb;
   padding: 0.5rem 1rem;
